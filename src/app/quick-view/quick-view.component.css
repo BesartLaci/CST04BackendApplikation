@@ -1,0 +1,13 @@
+
+.quick-view-stats {
+  /*padding: 15px 0px 0px 0px;*/
+  height: 50px;
+  color: dimgrey;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: -10px;
+  border-bottom-width: thin;
+  border-bottom-style: solid;
+  border-bottom-color: dimgray;
+  padding-top: 15px;
+}

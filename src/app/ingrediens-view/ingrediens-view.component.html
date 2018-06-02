@@ -1,0 +1,30 @@
+
+<div style="border: 1px solid red">ingredients Component</div>
+<p>
+  ingrediens-view works!
+</p>
+<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
+
+<p *ngIf="isAlive"><em>is Alive :)</em></p>
+
+
+<p *ngIf="!ingrediens"><em>Loading...</em></p>
+
+<table class='table' *ngIf="ingrediens">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Temp. (C)</th>
+      <th>Temp. (F)</th>
+      <th>Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ingredien of ingrediens">
+      <td>{{ ingredien.Name }}</td>
+      <td>{{ ingredien.Price }}</td>
+      <td>{{ ingredien.Type }}</td>
+      <td>{{ ingredien.Description }}</td>
+    </tr>
+  </tbody>
+</table>
