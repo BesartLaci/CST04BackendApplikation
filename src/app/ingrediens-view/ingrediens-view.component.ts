@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SynchronizerService } from '../synchronizer.service';
-import { Ingredient } from 'src/app/models/ingridient';
-import { Observable } from 'rxjs';
 
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
 import { Console } from '@angular/core/src/console';
+
+import { SynchronizerService } from '../synchronizer.service';
+import { Ingredient } from 'src/app/models/ingridient';
 
 @Component({
   selector: 'app-ingrediens-view',
