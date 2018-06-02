@@ -8,11 +8,11 @@ import { IngrediensViewComponent } from './ingrediens-view/ingrediens-view.compo
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/app-dashboard', pathMatch: 'full' },
+  { path: 'app-dashboard', component: DashboardComponent },
   { path: 'quick-view', component: QuickViewComponent },
   { path: 'packages-view', component: PackageViewComponent },
-  { path: 'ingrediens-view', component: IngrediensViewComponent }
+  { path: 'app-ingrediens-view', component: IngrediensViewComponent }
   
 ];
 
