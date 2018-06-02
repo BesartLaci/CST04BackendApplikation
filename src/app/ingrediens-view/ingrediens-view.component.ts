@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Console } from '@angular/core/src/console';
 
