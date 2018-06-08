@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\ingredients-view",
+    "\\src\\app\\models",
+    "\\src\\app\\quick-view"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\app\\synchronizer.service.ts",
   "PreviewInSolutionExplorer": false
 }
