@@ -23,7 +23,7 @@ export class IngredientsViewComponent implements OnInit {
   ngOnInit() {
     console.error('bevor ngOnInit');
     this.getIngredients();
-    this.getIsAlive();
+    //this.getIsAlive();
   }
 
 
