@@ -3,10 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\chocolates-view",
     "\\src\\app\\ingredients-view",
     "\\src\\app\\models",
-    "\\src\\app\\quick-view"
+    "\\src\\app\\navmenu",
+    "\\src\\app\\package-view"
   ],
-  "SelectedNode": "\\src\\app\\synchronizer.service.ts",
+  "SelectedNode": "\\src\\app\\package-view",
   "PreviewInSolutionExplorer": false
 }

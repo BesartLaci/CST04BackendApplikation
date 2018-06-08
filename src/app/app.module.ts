@@ -10,6 +10,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuickViewComponent } from './quick-view/quick-view.component';
 import { PackageViewComponent } from './package-view/package-view.component';
 import { IngredientsViewComponent } from './ingredients-view/ingredients-view.component';
+import { CustomersViewComponent } from './customers-view/customers-view.component';
+import { ChocolatesViewComponent } from './chocolates-view/chocolates-view.component';
+import { OrderActivitiesViewComponent } from './order-activities-view/order-activities-view.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { IngredientsViewComponent } from './ingredients-view/ingredients-view.co
     DashboardComponent,   
     QuickViewComponent,
     PackageViewComponent,
-    IngredientsViewComponent
+    IngredientsViewComponent,
+    CustomersViewComponent,
+    ChocolatesViewComponent,
+    OrderActivitiesViewComponent
    
   ],
   imports: [

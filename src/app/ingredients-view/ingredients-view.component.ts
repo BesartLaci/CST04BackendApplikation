@@ -11,6 +11,7 @@ import { Ingredient } from 'src/app/models/ingridient';
   templateUrl: './ingredients-view.component.html',
   styleUrls: ['./ingredients-view.component.css']
 })
+
 export class IngredientsViewComponent implements OnInit {
 
   ingredients: Ingredient[];
@@ -23,7 +24,7 @@ export class IngredientsViewComponent implements OnInit {
   ngOnInit() {
     console.error('bevor ngOnInit');
     this.getIngredients();
-    this.getIsAlive();
+    //this.getIsAlive();
   }
 
 
