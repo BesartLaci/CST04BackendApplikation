@@ -9,7 +9,7 @@ import { NavmenuComponent } from './navmenu/navmenu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuickViewComponent } from './quick-view/quick-view.component';
 import { PackageViewComponent } from './package-view/package-view.component';
-import { IngrediensViewComponent } from './ingrediens-view/ingrediens-view.component';
+import { IngredientsViewComponent } from './ingredients-view/ingredients-view.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { IngrediensViewComponent } from './ingrediens-view/ingrediens-view.compo
     DashboardComponent,   
     QuickViewComponent,
     PackageViewComponent,
-    IngrediensViewComponent
+    IngredientsViewComponent
    
   ],
   imports: [

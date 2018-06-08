@@ -7,13 +7,13 @@ import { SynchronizerService } from '../synchronizer.service';
 import { Ingredient } from 'src/app/models/ingridient';
 
 @Component({
-  selector: 'app-ingrediens-view',
-  templateUrl: './ingrediens-view.component.html',
-  styleUrls: ['./ingrediens-view.component.css']
+  selector: 'app-ingredients-view',
+  templateUrl: './ingredients-view.component.html',
+  styleUrls: ['./ingredients-view.component.css']
 })
-export class IngrediensViewComponent implements OnInit {
-  
-  ingrediens: Ingredient[];
+export class IngredientsViewComponent implements OnInit {
+
+  ingredients: Ingredient[];
   isAlive: boolean;
 
   constructor(private synchronizerService: SynchronizerService) {
@@ -22,7 +22,7 @@ export class IngrediensViewComponent implements OnInit {
 
   ngOnInit() {
     console.error('bevor ngOnInit');
-    this.getIngrediens();
+    this.getIngredients();
     this.getIsAlive();
   }
 
@@ -31,12 +31,8 @@ export class IngrediensViewComponent implements OnInit {
     this.synchronizerService.getIsAlive().subscribe(isAlive => this.isAlive = isAlive);
   }
 
-  getIngrediens(): void {
-    this.synchronizerService.getIngrediens().subscribe(ingrediens => this.ingrediens = ingrediens);
+  getIngredients(): void {
+    this.synchronizerService.getIngredients().subscribe(ingredients => this.ingredients = ingredients);
   }
 
- 
 }
-
-
-

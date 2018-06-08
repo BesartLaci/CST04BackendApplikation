@@ -1,16 +1,16 @@
 
 <div style="border: 1px solid red">ingredients Component</div>
 <p>
-  ingrediens-view works!
+  ingredients-view works!
 </p>
 <p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
 
 <p *ngIf="isAlive"><em>is Alive :)</em></p>
 
 
-<p *ngIf="!ingrediens"><em>Loading...</em></p>
+<p *ngIf="!ingredients"><em>Loading...</em></p>
 
-<table class='table' *ngIf="ingrediens">
+<table class='table' *ngIf="ingredients">
   <thead>
     <tr>
       <th>Date</th>
@@ -21,10 +21,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let ingredien of ingrediens">
-      <td>{{ ingredien.Name }}</td>
-      <td>{{ ingredien.Price }}</td>
-      <td>{{ ingredien.Type }}</td>
-      <td>{{ ingredien.Description }}</td>
+      <td>{{ ingredient.Name }}</td>
+      <td>{{ ingredient.Price }}</td>
+      <td>{{ ingredient.Type }}</td>
+      <td>{{ ingredient.Description }}</td>
     </tr>
   </tbody>
 </table>

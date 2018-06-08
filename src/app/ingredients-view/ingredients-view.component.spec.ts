@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngrediensViewComponent } from './ingrediens-view.component';
+import { IngredientsViewComponent } from './ingredients-view.component';
 
-describe('IngrediensViewComponent', () => {
-  let component: IngrediensViewComponent;
-  let fixture: ComponentFixture<IngrediensViewComponent>;
+describe('IngredientsViewComponent', () => {
+  let component: IngredientsViewComponent;
+  let fixture: ComponentFixture<IngredientsViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IngrediensViewComponent ]
+      declarations: [ IngredientsViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IngrediensViewComponent);
+    fixture = TestBed.createComponent(IngredientsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
