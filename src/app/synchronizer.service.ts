@@ -20,10 +20,10 @@ export class SynchronizerService {
   constructor(private http: HttpClient) { }
 
   // TODO: Wenn Server funktioniert, Ursache für Fehler suchen
-  getIngrediens(): Observable<Ingredient[]> {
+  getIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.serviceUrl + 'QueryIngredients')
       .pipe(
-      catchError(this.handleError('getIngrediens', []))
+      catchError(this.handleError('getIngredients', []))
       );
   }
 
