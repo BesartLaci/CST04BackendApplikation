@@ -1,0 +1,28 @@
+.ingredients-view-body {
+  padding-top: 20px;
+  /*margin-left: -15px;*/
+}
+
+.ingredients-view-list {
+  overflow: auto;
+  /*width: 20%;*/
+  border: 1px solid #000;
+}
+
+.ingredients-view-body-element {
+  height: 35vw;
+  padding: 0;
+}
+
+.ingredients-view-image {
+  background-image: url("https://i.pinimg.com/originals/34/99/de/3499ded369b3a822f08c1995e960af30.jpg");
+  height: 14vw;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.form-group-element {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

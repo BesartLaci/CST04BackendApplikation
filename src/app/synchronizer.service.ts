@@ -19,6 +19,15 @@ export class SynchronizerService {
  
   constructor(private http: HttpClient) { }
 
+
+  getIsAlive(): Observable<boolean> {
+    return this.http.get<boolean>(this.serviceUrl + 'IsAlive');
+    //  .pipe(
+    //  catchError(this.handleError('isAlive', []))
+    //);      
+  }
+
+
   // TODO: Wenn Server funktioniert, Ursache für Fehler suchen
   getIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.serviceUrl + 'QueryIngredients')
@@ -27,12 +36,13 @@ export class SynchronizerService {
       );
   }
 
-  getIsAlive(): Observable<boolean> {
-    return this.http.get<boolean>(this.serviceUrl + 'IsAlive');
-    //  .pipe(
-    //  catchError(this.handleError('isAlive', []))
-    //);      
+  updateIngredient(ingredient: Ingredient): Observable<any> {
+    return this.http.put(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
+      //tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateIngredient'))
+    );
   }
+
 
 
 

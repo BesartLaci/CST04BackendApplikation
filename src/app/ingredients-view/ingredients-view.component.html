@@ -1,30 +1,92 @@
 
-<div style="border: 1px solid red">ingredients Component</div>
-<p>
-  ingredients-view works!
-</p>
-<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
-
-<p *ngIf="isAlive"><em>is Alive :)</em></p>
 
 
-<p *ngIf="!ingredients"><em>Loading...</em></p>
 
-<table class='table' *ngIf="ingredients">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ingredien of ingrediens">
-      <td>{{ ingredient.Name }}</td>
-      <td>{{ ingredient.Price }}</td>
-      <td>{{ ingredient.Type }}</td>
-      <td>{{ ingredient.Description }}</td>
-    </tr>
-  </tbody>
-</table>
+
+<!--<p *ngIf="!ingredients"><em>Loading...</em></p>-->
+
+
+<!-- Left Body Content (List of all Packages) -->
+<div class="col-sm-3">
+  <!--<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
+    <p *ngIf="isAlive"><em>is Alive :)</em></p>-->
+
+  <div class="ingredients-view-body-element ingredients-view-list">
+    <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of ingredients">
+      <a (click)="setSelectedIngredient(ingredient)" class="list-group-item"> {{ingredient.Name}}</a>    
+    </div>
+  </div>
+  <button type="button" class="btn btn-default" style="width: 100%">Create New</button>
+
+</div>
+
+<!-- Middle Body Content (Description of selected Packages) -->
+<div class="col-sm-6">
+  <div class="ingredients-view-image"></div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> GUID: </label>
+    <label class="col-sm-6"> {{selectedIngredient.IngredientId}} </label>
+    
+    <div class="col-lg-3" background-color="green">O</div>
+    <!--ng-style="selectedIngredient.Available === true && {'background-color':'green'}  || selectedIngredient.Available === false && {'background-color':'black'}-->
+  </div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> Name: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.Name" required /></div><!--placeholder="name"-->
+    <div class="col-lg-3" background-color="green">O</div>
+    <!--ng-style="selectedIngredient.Available === true && {'background-color':'green'}  || selectedIngredient.Available === false && {'background-color':'black'}-->
+  </div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> Available: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.Available" /></div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> Price: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.Price" /></div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> Type: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.Type" /></div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <div class="form-group form-group-element">
+    <label class="col-sm-3"> UnitType: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.UnitType" /></div>
+    <div class="col-sm-3"></div>
+  </div>
+  <div class="form-group form-group-element">
+    <label class="col-sm-3">Description: </label>
+    <textarea class="form-control col-sm-9" [(ngModel)]="selectedIngredient.Description"></textarea>
+  </div>
+
+  <div class="form-group form-group-element col-sm-12">
+    <button type="button" class="btn btn-default col-sm-4">New by Copy</button>
+    <button type="button" class="btn btn-default col-sm-4" (click)="saveSelectedIngredient()">Save</button>
+    <button type="button" class="btn btn-default col-sm-4" (click)="enableDisableSelecetedIgredient()">Enable/Disable</button>
+  </div>
+
+</div>
+
+<!-- Right Body Content (Lists all parts of package) -->
+<div class="col-sm-3">
+  <!--<div class="ingredients-view-body-element package-view-list" style="height: 21vw;">
+    <div class="list-group" style="width: 100%;">
+      <b class="list-group-item">Items List</b>
+      <a href="#" class="list-group-item">Second item</a>
+    </div>
+  </div>
+  <div class="ingredients-view-body-element package-view-list" style="height: 14vw; margin-top:10px;">
+    <div class="list-group" style="width: 100%;">
+      <b class="list-group-item">Items to Add</b>
+      <a href="#" class="list-group-item">Second item</a>
+    </div>
+  </div>-->
+</div>
