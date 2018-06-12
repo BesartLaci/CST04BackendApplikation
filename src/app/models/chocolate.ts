@@ -15,6 +15,7 @@ export class Chocolate {
   //Image: string;
   //Wrapping: Wrapping;  
   //Ratings: Rating[];
+  //Modified: Date;
 
 }
 

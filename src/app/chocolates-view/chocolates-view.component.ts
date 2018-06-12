@@ -2,12 +2,13 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 //import { Location } from '@angular/common';
 
 import { Observable } from 'rxjs';
-import { Console } from '@angular/core/src/console';
-
-import { SynchronizerService } from '../synchronizer.service';
-import { Ingredient } from 'src/app/models/ingridient';
-import { Chocolate } from 'src/app/models/chocolate';
 import { forEach } from '@angular/router/src/utils/collection';
+
+import { Console } from '@angular/core/src/console';
+import { SynchronizerService } from '../synchronizer.service';
+
+import { Chocolate } from 'src/app/models/chocolate';
+import { Ingredient } from 'src/app/models/ingridient';
 
 @Component({
   selector: 'app-chocolates-view',
@@ -16,16 +17,18 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class ChocolatesViewComponent implements OnInit {
 
+  isAlive: boolean;
+  updateCheck: boolean;
+
   chocolates: Chocolate[];
   @Input() selectedChocolate: Chocolate;
   chocolatePrice: number;
 
-  tempIngredients: Ingredient[]
+  tempIngredients: Ingredient[];
   availableIngredients: Ingredient[];
   selectedIngredients: Ingredient[];
   
-  isAlive: boolean;
-  updateCheck: boolean;
+
 
   constructor(
     private synchronizerService: SynchronizerService,
@@ -58,11 +61,11 @@ export class ChocolatesViewComponent implements OnInit {
 
   ////////// Chocolate-View Buttons //////////
 
-  setSelectedChocolate(tempChoclate: Chocolate): void {
+  setSelectedChocolate(tempChocolate: Chocolate): void {
 
-    if (tempChoclate != null) {
-      this.selectedChocolate = tempChoclate;
-      this.selectedIngredients = tempChoclate.Ingredients;
+    if (tempChocolate != null) {
+      this.selectedChocolate = tempChocolate;
+      this.selectedIngredients = tempChocolate.Ingredients;
       this.getIngredientsForAvailableIngredients();
       this.setAvailableIngredients();
       this.setChocolatePrice();

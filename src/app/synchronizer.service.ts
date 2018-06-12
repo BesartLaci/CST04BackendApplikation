@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Ingredient } from 'src/app/models/ingridient';
 import { Chocolate } from 'src/app/models/chocolate';
+import { Package } from 'src/app/models/package';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -72,6 +73,13 @@ export class SynchronizerService {
 
   getChocolatesWithIngredients(): Observable<Chocolate[]> {
     return this.http.get<Chocolate[]>(this.serviceUrl + 'QueryChocolatesWithIngredients')
+      .pipe(
+      catchError(this.handleError('getChocolates', []))
+      );
+  }
+
+  getPackagesWithChocolates(): Observable<Package[]> {
+    return this.http.get<Package[]>(this.serviceUrl + 'QuerytPackagesWithChocolates')
       .pipe(
       catchError(this.handleError('getChocolates', []))
       );

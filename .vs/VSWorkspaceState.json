@@ -4,8 +4,11 @@
     "\\e2e",
     "\\e2e\\src",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\chocolates-view",
+    "\\src\\app\\ingredients-view",
+    "\\src\\app\\models"
   ],
-  "SelectedNode": "\\src\\app\\synchronizer.service.ts",
+  "SelectedNode": "\\src\\app\\chocolates-view\\chocolates-view.component.css",
   "PreviewInSolutionExplorer": false
 }
