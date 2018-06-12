@@ -1,0 +1,48 @@
+.chocolate-view-body {
+  padding-top: 20px;
+  /*margin-left: -15px;*/
+}
+
+.chocolate-view-list {
+  overflow: auto;
+  /*width: 20%;*/
+  border: 1px solid #000;
+}
+
+.chocolate-view-chocolateList-element {
+  height: 40vw;
+  padding: 5;
+}
+
+.chocolate-view-chocolateDetails-element {
+  height: 40vw;
+  padding: 5;
+}
+
+.chocolate-view-chocolateIngredients-element {
+  height: 40vw;
+  padding: 5;
+}
+
+.chocolate-view-selectedIngredients-element {
+  height: 20vw;
+  padding: 0;
+}
+
+.chocolate-view-availableIngredients-element {
+  height: 20vw;
+  padding: 0;
+}
+
+.chocolate-view-image {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjyC0yokWiE9yU7sqnGriuY9Jsxn9wtPdkANEu45uCGM0m9PA6");
+  height: 20vw;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.form-group-element {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

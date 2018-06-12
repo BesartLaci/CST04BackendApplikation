@@ -22,13 +22,17 @@
 
 <!-- Middle Body Content (Description of selected Packages) -->
 <div class="col-sm-6">
+ 
   <div class="ingredients-view-image"></div>
 
   <div class="form-group form-group-element">
     <label class="col-sm-3"> GUID: </label>
     <label class="col-sm-6"> {{selectedIngredient.IngredientId}} </label>
-    
-    <div class="col-lg-3" background-color="green">O</div>
+
+    <!--<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
+  <p *ngIf="isAlive"><em>is Alive :)</em></p>-->
+    <div *ngIf="!updateCheck" class="col-lg-3">no update</div>
+    <div *ngIf="updateCheck" class="col-lg-3">Update = {{updateCheck}}</div>
     <!--ng-style="selectedIngredient.Available === true && {'background-color':'green'}  || selectedIngredient.Available === false && {'background-color':'black'}-->
   </div>
 

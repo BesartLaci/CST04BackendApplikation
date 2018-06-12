@@ -4,11 +4,8 @@
     "\\e2e",
     "\\e2e\\src",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\ingredients-view",
-    "\\src\\app\\models",
-    "\\src\\app\\package-view"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\synchronizer.service.ts",
   "PreviewInSolutionExplorer": false
 }
