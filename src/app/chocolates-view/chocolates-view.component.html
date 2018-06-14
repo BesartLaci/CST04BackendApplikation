@@ -1,12 +1,12 @@
 
-<div class="col-sm-3">
+<div  class="col-sm-3">
   <!--<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
     <p *ngIf="isAlive"><em>is Alive :)</em></p>-->
   <div>
     <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> chocolateCreations: </label>
   </div>
-  <div class="chocolate-view-chocolateList-element chocolate-view-list">
-    <div class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of chocolates">
+  <div  class="chocolate-view-chocolateList-element chocolate-view-list">
+    <div  class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of chocolates">
       <a (click)="setSelectedChocolate(chocolate)" class="list-group-item"> {{chocolate.Name}}</a>
     </div>
   </div>
@@ -22,7 +22,7 @@
   </div>
 
 
-  <div class="col-sm-12 chocolate-view-ChocolateDetailsProperties-element">
+  <div class="col-sm-12 chocolate-view-ChocolateDetailsProperties-element" *ngIf="selectedChocolate">
     <!--<p *ngIf="!isAlive"><em>is not Alive!!!!!!!!</em></p>
   <p *ngIf="isAlive"><em>is Alive :)</em></p>-->
     <!--<div class="form-group form-group-element">
@@ -63,12 +63,12 @@
 
 
   <!-- Right Body Content (Lists all parts of package) -->
-<div class="col-sm-3 chocolate-view-chocolateIngredients-element">
+<div class="col-sm-3 chocolate-view-chocolateIngredients-element" >
 
   <div>
     <label class="col-sm-12" style="margin-bottom:5px;"> selectedChocolateContent: </label>
   </div>
-  <div class="chocolate-view-selectedIngredients-element chocolate-view-list">    
+  <div class="chocolate-view-selectedIngredients-element chocolate-view-list" *ngIf="selectedIngredients">    
       <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of selectedIngredients">
         <a (click)="putInAivailableIngredients(ingredient)" class="list-group-item">{{ingredient.Name}} | {{ingredient.Type}} | € {{ingredient.Price}}</a>
       </div>    
@@ -78,7 +78,7 @@
   <div>
     <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> availableIngredients: </label>
   </div>
-  <div class="chocolate-view-availableIngredients-element chocolate-view-list">
+  <div class="chocolate-view-availableIngredients-element chocolate-view-list" *ngIf="availableIngredients">
     <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of availableIngredients">
       <a (click)="putInSelectedIngredients(ingredient)" class="list-group-item">{{ingredient.Name}} | {{ingredient.Type}} | € {{ingredient.Price}}</a>
     </div>

@@ -64,8 +64,9 @@ export class ChocolatesViewComponent implements OnInit {
   setSelectedChocolate(tempChocolate: Chocolate): void {
 
     if (tempChocolate != null) {
+      this.getChocolatesWithIngredients();
       this.selectedChocolate = tempChocolate;
-      this.selectedIngredients = tempChocolate.Ingredients;
+      this.selectedIngredients = this.selectedChocolate.Ingredients;
       this.getIngredientsForAvailableIngredients();
       this.setAvailableIngredients();
       this.setChocolatePrice();
@@ -109,23 +110,35 @@ export class ChocolatesViewComponent implements OnInit {
 
     this.synchronizerService.getIngredients()
       .subscribe(ingredients => this.tempIngredients = ingredients);
-
+  
   }
 
 
   setAvailableIngredients(): void {
-    for (var tempIngredient of this.selectedIngredients) {
-      var index = this.tempIngredients.indexOf(tempIngredient);
-      this.tempIngredients.splice(index, 1);
-    };
+    for (var availableIngredient of this.tempIngredients) {
 
-    this.availableIngredients = this.tempIngredients;
+      for (var tempIngredient of this.selectedIngredients) {
+        if (tempIngredient.IngredientId == availableIngredient.IngredientId) {
+
+        } else {
+
+          this.availableIngredients.push(availableIngredient);
+        }
+
+
+      };
+
+      //this.availableIngredients = this.tempIngredients;
+    }
   }
-  
 
   deleteFromAvailableIngredients(tempIngredient): void {
+    console.error(tempIngredient.IngredientId);
+    
     var index = this.availableIngredients.indexOf(tempIngredient);
-    this.availableIngredients.splice(index, 1);
+    console.error(index)
+    console.error(this.availableIngredients.splice(index, 1));
+    
   }
 
   deleteFromSelectedIngredients(tempIngredient): void {
