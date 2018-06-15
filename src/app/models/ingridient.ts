@@ -1,10 +1,10 @@
 
 
 export class Ingredient {
-  //IngredientID: AAGUID;
+  //IngredientId: string;
+  IngredientId: AAGUID;
   Available: boolean;
   Description: string;
-  IngredientID: string;
   Name: string;
   Price: number;
   Type: string;

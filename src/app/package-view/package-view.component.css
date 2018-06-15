@@ -5,24 +5,53 @@
 
 .package-view-list {
   overflow: auto;
-  /*width: 20%;*/
-  border: 1px solid #000;
+  border: 1px groove #000;
 }
 
-.package-view-body-element {
-  height: 35vw;
-  padding: 0;
+.package-view-packageList-element {
+  height: 38vw;
+  margin: auto;
+}
+
+.package-view-packageDetails-element {
+  height: 38vw;
+  margin: auto;
+}
+
+.package-view-packageChocolates-element {
+  height: 38vw;
+  margin: auto;
+}
+
+.package-view-selectedChocolates-element {
+  height: 18vw;
+  margin-top: auto;
+}
+
+.package-view-availableChocolates-element {
+  height: 19vw;
+  margin-top: auto;
 }
 
 .package-view-image {
-  background-image: url("https://i.pinimg.com/originals/34/99/de/3499ded369b3a822f08c1995e960af30.jpg");
-  height: 14vw;
+  background-image: url("http://media02.hongkiat.com/chocolate-packaging-designs/handmade.jpg");
+  height: 20vw;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
+package-view-packageDetailsProperties-element {
+  height: 38vw;
+}
+
+package-view-ChocolateButtons-element {
+}
+
 .form-group-element {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /*padding:0;
+  display: flex;
+  align-items: center;*/
 }
