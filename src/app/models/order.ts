@@ -7,5 +7,5 @@ export class Order {
   DateOfDelivery: Date;
   Status: Orderstatus;
   Customer: Customer;
-  Note: string
+  Note: string;
 }

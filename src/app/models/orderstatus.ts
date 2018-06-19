@@ -1,4 +1,4 @@
 export class Orderstatus {
-  StatusId: AAGUID;
+  StatusId: string;
   Description: string;
 }
