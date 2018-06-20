@@ -13,10 +13,11 @@ export class OrderActivitiesViewComponent implements OnInit {
   newOrders: Order[];
   pausedOrders: Order[];
   delayOrders: Order[];
+  tempOrder: Order;
   //@Input() selectedOrder: Order;
   isAlive: boolean;
   updateCheck: boolean;
-  newId = "0c16612c - 9ad3-4ffe-bb58 - 3ea434e0f91f";
+  newId = '0c16612c-9ad3-4ffe-bb58-3ea434e0f91f';
   pausedId = "e9ea67d5-bee2-4372-9abb-408a2afe3640";
   delayId = "83d176ef-0c09-4fdb-9e8e-3f422bed7867";
 
@@ -31,6 +32,9 @@ export class OrderActivitiesViewComponent implements OnInit {
     console.error('ngOnInit start');
     this.getOrders();
     this.getIsAlive();
+    this.newOrders = this.orders;
+    //this.getAnotherOrders();
+    console.error(this.newOrders);
     console.error('ngOnInit end');
   }
 
@@ -47,18 +51,21 @@ export class OrderActivitiesViewComponent implements OnInit {
     this.synchronizerService.getOrders()
       .subscribe(orders => this.orders = orders);
     console.error('getOrders() durchgeführt');
+  }
 
+  getAnotherOrders(): void {
+    console.error('getAnotherOrders() start');
     for (var tempOrder of this.orders) {
-      //if (tempOrder.Status.StatusId == this.newId) {
-        console.error('Bin in new orders');
-        //this.newOrders.push(tempOrder);
-      //} 
-      //else if (tempOrder.Status.StatusId == this.pausedId) {
-      //  this.pausedOrders.push(tempOrder);
-      //}
-      //else if (tempOrder.Status.StatusId == this.delayId) {
-      //  this.delayOrders.push(tempOrder);
-      //}
+      if (tempOrder.Status.StatusId == this.newId) {
+        console.error(tempOrder);
+        this.newOrders.push(tempOrder);
+      }
+      else if (tempOrder.Status.StatusId == this.pausedId) {
+        this.pausedOrders.push(tempOrder);
+      }
+      else if (tempOrder.Status.StatusId == this.delayId) {
+        this.delayOrders.push(tempOrder);
+      }
     }
   }
 

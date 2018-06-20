@@ -1,20 +1,31 @@
 
 <div class="quick-view-stats">
 
-  <div class='col-sm-3'>
-    Date: 16.05.2018
+  <div class='col-sm-2'>
+    Start Date: <input type="date" value={{shortDate}} />
   </div>
 
-  <div class='col-sm-3'>
-    Sales: € 37.000
+  <div class='col-sm-2'>
+    End Date: <input type="date" />
+  </div>
+  <div class='col-sm-2'>
+    <button class="default btn">Refresh</button>
   </div>
 
-  <div class='col-sm-3'>
-    OpenOrders: 19
+  <div class='col-sm-2'>
+    OpenOrders: <p>11</p>
   </div>
 
-  <div class='col-sm-3'>
-    PausedOrders: 3
+  <div class='col-sm-2'>
+    <p>{{shortDate}}</p>
+    <!--<p id="date"></p>
+  <p>Date</p>
+  <script>
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+  </script>-->
   </div>
-
 </div>

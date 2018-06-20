@@ -1,7 +1,7 @@
 <div class="col-sm-6">
   <p>Open Orders:</p>
   <div class="order-view-body-element order-view-list">
-    <div class="table-striped" style="width:100%; margin:0">
+    <div class="table-striped" style="width:100%; margin:0" *ngIf="newOrders" >
       <table class="table">
         <tr>
           <th>Order ID</th>
@@ -52,7 +52,7 @@
           <th>Note</th>
           <th>Delivery Date</th>
         </tr>
-        <tr *ngFor="let order of delayOrders">
+        <tr *ngFor="let order of orders">
           <td>{{order.OrderId}}</td>
           <td>{{order.Note}}</td>
           <td>{{order.DateOfDelivery}}</td>
