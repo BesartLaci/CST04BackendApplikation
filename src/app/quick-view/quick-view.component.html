@@ -2,30 +2,26 @@
 <div class="quick-view-stats">
 
   <div class='col-sm-2'>
-    Start Date: <input type="date" value={{shortDate}} />
+    StartDate: <input type="date" value="{{startDate}}" />
   </div>
 
   <div class='col-sm-2'>
-    End Date: <input type="date" />
+    <p>End Date: <input type="date" value="2018-06-20" /></p>
   </div>
+
+  <div class='col-sm-2'>
+    <p>OpenOrders:{{countOpenOrders}}</p>
+  </div>
+
+  <div class='col-sm-2'>
+    <p>PausedOrders: {{countPausedOrders}}</p>
+  </div>
+
+  <div class='col-sm-2'>
+    <p>Sales: {{SumSales}}</p>
+  </div>
+
   <div class='col-sm-2'>
     <button class="default btn">Refresh</button>
-  </div>
-
-  <div class='col-sm-2'>
-    OpenOrders: <p>11</p>
-  </div>
-
-  <div class='col-sm-2'>
-    <p>{{shortDate}}</p>
-    <!--<p id="date"></p>
-  <p>Date</p>
-  <script>
-    n = new Date();
-    y = n.getFullYear();
-    m = n.getMonth() + 1;
-    d = n.getDate();
-    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
-  </script>-->
   </div>
 </div>

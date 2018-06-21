@@ -6,12 +6,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quick-view.component.css']
 })
 export class QuickViewComponent implements OnInit {
-  date = new Date();
-  shortDate = this.date.getDay() + '.' + this.date.getMonth() + '.' + this.date.getFullYear();
+  //date = Date.now();
+
+  today = new Date();
+  dd = this.today.getDate();
+  mm = this.today.getMonth() + 1; //January is 0!
+  yyyy = this.today.getFullYear();
+
+  startDate = this.yyyy + '-0' + this.mm + '-' + this.dd;
+  //shortDate = this.date.getFullYear() + '-0' + this.date.getMonth() + '-0' + this.date.getDay();
 
   constructor() { }
 
   ngOnInit() {
+    //this.getShortDate();
+  }
+
+  getShortDate(): void {
+
+    //if (this.dd < 10) {
+    //  this.dd = '0' + this.dd;
+    //}
+    //if (this.mm < 10) {
+    //  this.mm = '0' + this.mm;
+    //}
+
+    //var shortDate = this.dd + '/' + this.mm + '/' + this.yyyy;
   }
 
 }

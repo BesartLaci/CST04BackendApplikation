@@ -20,13 +20,13 @@ export class ChocolatesViewComponent implements OnInit {
   isAlive: boolean;
   updateCheck: boolean;
 
-  chocolates: Chocolate[];
+  chocolates$: Observable<Chocolate[]>;
   @Input() selectedChocolate: Chocolate;
   chocolatePrice: number;
 
-  tempIngredients: Ingredient[];
-  availableIngredients: Ingredient[];
-  selectedIngredients: Ingredient[];
+  tempIngredients$: Observable<Ingredient[]>;
+  availableIngredients$: Observable<Ingredient[]>;
+  selectedIngredients$: Observable<Ingredient[]>;
   
 
 
@@ -39,6 +39,7 @@ export class ChocolatesViewComponent implements OnInit {
 
   ngOnInit() {  
     //this.getIsAlive();
+    this.selectedChocolate = new Chocolate();
     this.getChocolatesWithIngredients();    
     //this.getIngredientsForAvailableIngredients();
   }
@@ -55,7 +56,7 @@ export class ChocolatesViewComponent implements OnInit {
 
   getChocolatesWithIngredients(): void {   
     this.synchronizerService.getChocolatesWithIngredients()
-      .subscribe(chocolates => this.chocolates = chocolates);   
+      .subscribe(chocolates => this.chocolates$ = chocolates);   
   }
 
 
@@ -66,7 +67,7 @@ export class ChocolatesViewComponent implements OnInit {
     if (tempChocolate != null) {
       this.getChocolatesWithIngredients();
       this.selectedChocolate = tempChocolate;
-      this.selectedIngredients = this.selectedChocolate.Ingredients;
+      this.selectedIngredients$ = this.selectedChocolate.Ingredients;
       this.getIngredientsForAvailableIngredients();
       this.setAvailableIngredients();
       this.setChocolatePrice();
@@ -77,7 +78,7 @@ export class ChocolatesViewComponent implements OnInit {
 
   putInSelectedIngredients(tempIngredient): void {
 
-    this.selectedIngredients.push(tempIngredient);
+    this.selectedIngredients$.push(tempIngredient);
     this.deleteFromAvailableIngredients(tempIngredient);
     this.setChocolatePrice();
 
@@ -86,7 +87,7 @@ export class ChocolatesViewComponent implements OnInit {
 
   putInAivailableIngredients(tempIngredient): void {
 
-    this.availableIngredients.push(tempIngredient);
+    this.availableIngredients$.push(tempIngredient);
     this.deleteFromSelectedIngredients(tempIngredient)
     this.setChocolatePrice();
 
@@ -109,20 +110,20 @@ export class ChocolatesViewComponent implements OnInit {
   getIngredientsForAvailableIngredients(): void {
 
     this.synchronizerService.getIngredients()
-      .subscribe(ingredients => this.tempIngredients = ingredients);
+      .subscribe(ingredients => this.tempIngredients$ = ingredients);
   
   }
 
 
   setAvailableIngredients(): void {
-    for (var availableIngredient of this.tempIngredients) {
+    for (var availableIngredient of this.tempIngredients$ {
 
-      for (var tempIngredient of this.selectedIngredients) {
+      for (var tempIngredient of this.selectedIngredients$) {
         if (tempIngredient.IngredientId == availableIngredient.IngredientId) {
 
         } else {
 
-          this.availableIngredients.push(availableIngredient);
+          this.availableIngredients$.push(availableIngredient);
         }
 
 
@@ -135,15 +136,15 @@ export class ChocolatesViewComponent implements OnInit {
   deleteFromAvailableIngredients(tempIngredient): void {
     console.error(tempIngredient.IngredientId);
     
-    var index = this.availableIngredients.indexOf(tempIngredient);
+    var index = this.availableIngredients$.indexOf(tempIngredient);
     console.error(index)
-    console.error(this.availableIngredients.splice(index, 1));
+    console.error(this.availableIngredients$.splice(index, 1));
     
   }
 
   deleteFromSelectedIngredients(tempIngredient): void {
-    var index = this.selectedIngredients.indexOf(tempIngredient);
-    this.selectedIngredients.splice(index, 1);
+    var index = this.selectedIngredients$.indexOf(tempIngredient);
+    this.selectedIngredients$.splice(index, 1);
   }
 
 
@@ -151,7 +152,7 @@ export class ChocolatesViewComponent implements OnInit {
 
     this.chocolatePrice = 0;
 
-    for (var tempIngredient of this.selectedIngredients) {
+    for (var tempIngredient of this.selectedIngredients$) {
       this.chocolatePrice += tempIngredient.Price;
     }
 
