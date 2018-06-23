@@ -4,7 +4,6 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\models",
-    "\\src\\app\\order-activities-view",
     "\\src\\app\\quick-view"
   ],
   "SelectedNode": "\\src\\app\\quick-view\\quick-view.component.ts",

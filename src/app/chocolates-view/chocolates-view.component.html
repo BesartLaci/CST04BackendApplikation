@@ -4,7 +4,7 @@
     <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> chocolateCreations: </label>
   </div>
   <div  class="chocolate-view-chocolateList-element chocolate-view-list">
-    <div  class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of chocolates$">
+    <div class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of chocolates$">
       <a (click)="setSelectedChocolate(chocolate)" class="list-group-item"> {{chocolate.Name}}</a>
     </div>
   </div>

@@ -14,6 +14,14 @@ export class QuickViewComponent implements OnInit {
   yyyy = this.today.getFullYear();
 
   startDate = this.yyyy + '-0' + this.mm + '-' + this.dd;
+
+  x = this.today.setDate(this.dd + 30);
+  endDays = this.today.getDate();
+  endMonth = this.today.getMonth();
+  endYear = this.today.getFullYear();
+
+  endDate = this.endYear + '-0' + this.endMonth + '-' + this.endDays;
+
   //shortDate = this.date.getFullYear() + '-0' + this.date.getMonth() + '-0' + this.date.getDay();
 
   constructor() { }
