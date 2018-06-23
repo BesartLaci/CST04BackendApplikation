@@ -7,11 +7,13 @@
           <th>Order ID</th>
           <th>Note</th>
           <th>Delivery Date</th>
+          <th>OrderStatusId</th>
         </tr>
         <tr *ngFor="let order of newOrders">
           <td>{{order.OrderId}}</td>
           <td>{{order.Note}}</td>
           <td>{{order.DateOfDelivery}}</td>
+          <td>{{order.Status.OrderStatusId}}</td>
         </tr>
       </table>
     </div>
@@ -31,11 +33,13 @@
           <th>Order ID</th>
           <th>Note</th>
           <th>Delivery Date</th>
+          <th>OrderStatusId</th>
         </tr>
         <tr *ngFor="let order of pausedOrders">
           <td>{{order.OrderId}}</td>
           <td>{{order.Note}}</td>
           <td>{{order.DateOfDelivery}}</td>
+          <td>{{order.Status.OrderStatusId}}</td>
         </tr>
       </table>
     </div>
@@ -51,11 +55,13 @@
           <th>Order ID</th>
           <th>Note</th>
           <th>Delivery Date</th>
+          <th>OrderStatusId</th>
         </tr>
         <tr *ngFor="let order of orders">
           <td>{{order.OrderId}}</td>
           <td>{{order.Note}}</td>
           <td>{{order.DateOfDelivery}}</td>
+          <td>{{order.Status.OrderStatusId}}</td>
         </tr>
       </table>
     </div>

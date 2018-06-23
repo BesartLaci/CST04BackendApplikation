@@ -33,7 +33,7 @@ export class OrderActivitiesViewComponent implements OnInit {
     this.getOrders();
     this.getIsAlive();
     this.newOrders = this.orders;
-    //this.getAnotherOrders();
+    this.getAnotherOrders();
     console.error(this.newOrders);
     console.error('ngOnInit end');
   }
@@ -56,14 +56,14 @@ export class OrderActivitiesViewComponent implements OnInit {
   getAnotherOrders(): void {
     console.error('getAnotherOrders() start');
     for (var tempOrder of this.orders) {
-      if (tempOrder.Status.StatusId == this.newId) {
+      if (tempOrder.Status.OrderStatusId.match(this.newId)) {
         console.error(tempOrder);
         this.newOrders.push(tempOrder);
       }
-      else if (tempOrder.Status.StatusId == this.pausedId) {
+      else if (tempOrder.Status.OrderStatusId.match(this.pausedId)) {
         this.pausedOrders.push(tempOrder);
       }
-      else if (tempOrder.Status.StatusId == this.delayId) {
+      else if (tempOrder.Status.OrderStatusId.match(this.delayId)) {
         this.delayOrders.push(tempOrder);
       }
     }

@@ -1,4 +1,4 @@
 export class Orderstatus {
-  StatusId: string;
+  OrderStatusId: string;
   Description: string;
 }
