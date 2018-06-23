@@ -11,25 +11,24 @@ import { Order } from 'src/app/models/order';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    //'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    //'Authorization': 'authkey',
-    //'userid': '1'
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Request-Headers': 'Content - Type',
     'Content-Type': 'application/json'
-    //'apikey': this.apikey,
-    //'appkey': this.appkey
   })
-  //params: new HttpParams().set('program_id', this.program_id)
+
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class SynchronizerService {
-  
-  private serviceUrl = 'http://localhost:8733/AppServiceService/';  // URL to web api
- 
+
+
+  //private serviceUrl = 'http://localhost:8733/AppServiceService/';  
+  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+
+
+
   constructor(private http: HttpClient) { }
 
 
@@ -59,16 +58,24 @@ export class SynchronizerService {
       return of(result as T);
     };
   }
-  
+
 
   ////////// Get Methods //////////
-  
+
   // TODO: Wenn Server funktioniert, Ursache für Fehler suchen
   getIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.serviceUrl + 'QueryIngredients')
       .pipe(
       catchError(this.handleError('getIngredients', []))
       );
+  }
+
+  getIngredientsWithChocoladeId(id: AAGUID): Observable<Ingredient[]> {
+    const url = `${this.serviceUrl + 'QueryIngredientsByChocolateId'}/${id}`;
+    return this.http.get<Ingredient[]>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Ingredient[]>(`getHero id=${id}`))
+    );
   }
 
 
@@ -95,11 +102,13 @@ export class SynchronizerService {
 
 
 
-    ////////// Update Methods //////////
+  ////////// Update Methods //////////
 
 
   updateIngredient(ingredient: Ingredient): Observable<boolean> {
-    return this.http.put(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
+
+
+    return this.http.post(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
       //tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateIngredient'))
     );
