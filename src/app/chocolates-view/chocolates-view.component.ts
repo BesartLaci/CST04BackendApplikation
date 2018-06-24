@@ -51,7 +51,7 @@ export class ChocolatesViewComponent implements OnInit {
     //this.getIsAlive();
     this.selectedChocolate = new Chocolate();
     this.getChocolatesWithIngredients();
-    this.getShapes();
+    //this.getShapes();
     this.availableIngredients = new Array<Ingredient>();
     this.getIngredientsForAvailableIngredients();    
   } 
@@ -189,7 +189,7 @@ export class ChocolatesViewComponent implements OnInit {
       }
          
     }
-    //this.availableIngredients = this.tempIngredients;
+    
   }
 
   deleteFromAvailableIngredients(tempIngredient: Ingredient): void {

@@ -9,6 +9,7 @@ import { Chocolate } from 'src/app/models/chocolate';
 import { Package } from 'src/app/models/package';
 import { Order } from 'src/app/models/order';
 import { Shape } from 'src/app/models/shape';
+import { Customer } from 'src/app/models/customer';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,8 +26,8 @@ const httpOptions = {
 export class SynchronizerService {
 
 
-  private serviceUrl = 'http://localhost:8090/AppServiceService/';  
-  //private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+  //private serviceUrl = 'http://localhost:8090/AppServiceService/';  
+  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
 
 
 
@@ -101,6 +102,14 @@ export class SynchronizerService {
       );
   }
 
+  getCustomerWithCustomer(id: AAGUID): Observable<Customer[]> {
+    const url = `${this.serviceUrl + 'QueryCustomerByCustomerId'}/${id}`;
+    return this.http.get<Customer[]>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Customer[]>(`getCustomer id=${id}`))
+    );
+  }
+
   getShapes(): Observable<Shape[]> {
     return this.http.get<Shape[]>(this.serviceUrl + 'QueryShapes')
       .pipe(
@@ -129,6 +138,14 @@ export class SynchronizerService {
     );
   }
 
+  updatePackage(updatePackage: Chocolate): Observable<boolean> {
+
+    return this.http.post(this.serviceUrl + 'UpdateChocolate', updatePackage, httpOptions).pipe(
+      //tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updatePackage'))
+    );
+  }
+
   ////////// Insert Methods //////////
 
   createNewIngredient(newIngredient: Ingredient): Observable<boolean> {
@@ -144,7 +161,7 @@ export class SynchronizerService {
   }
 
   createNewPackage(newPackage: Package): Observable<boolean> {
-    return this.http.post(this.serviceUrl + 'InsertChocolate', newPackage, httpOptions).pipe(
+    return this.http.post(this.serviceUrl + 'InsertPackage', newPackage, httpOptions).pipe(
       catchError(this.handleError<any>('createNewPackage '))
     );
   }

@@ -1,7 +1,8 @@
 
 export class Wrapping{
 
-WrappingId: AAGUID;
+  WrappingId: AAGUID;
+  Name: string;
 
 
 

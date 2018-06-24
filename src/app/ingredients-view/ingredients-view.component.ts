@@ -60,6 +60,7 @@ export class IngredientsViewComponent implements OnInit {
     if (tempIngredient != null) {
       this.selectedIngredient = tempIngredient;
     }
+    this.getIngredients();
 
   }
 

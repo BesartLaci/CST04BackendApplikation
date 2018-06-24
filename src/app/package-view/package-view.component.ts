@@ -36,6 +36,7 @@ export class PackageViewComponent implements OnInit {
     private synchronizerService: SynchronizerService,
 
   ) {
+    this.availableChocolates = new Array<Chocolate>();
     console.error('ChocolatesViewComponent constructor mit synchronizerService');
   }
 
@@ -44,6 +45,7 @@ export class PackageViewComponent implements OnInit {
     //this.getIsAlive();
     this.selectedPackage = new Package();
     this.getPackagesWithChocolates();
+
     this.availableChocolates = new Array<Chocolate>();
     this.getChocolatesForAvailableChocolates();
     
@@ -71,9 +73,12 @@ export class PackageViewComponent implements OnInit {
   setSelectedPackage(tempPackage: Package): void {
     console.error("setSelectedPackage()");
     if (tempPackage != null) {
+
       this.selectedPackage = tempPackage;
       this.setDefaultDemoData();
       this.selectedChocolates = this.selectedPackage.Chocolates;
+
+      this.availableChocolates = new Array<Chocolate>()
 
       this.getChocolatesForAvailableChocolates();
       this.setAvailableChocolates();
@@ -102,11 +107,20 @@ export class PackageViewComponent implements OnInit {
 
 
   saveSelectedChocolate(): void {
-    //TO DO
+    console.error("createNewPackage()");
+    this.updateCheck = false;
+    this.selectedPackage.Chocolates = this.selectedChocolates;
+
+    console.error("--------  TRY TO Update Package ------")
+
+    this.synchronizerService.createNewPackage(this.selectedPackage)
+      .subscribe(updateCheck => this.updateCheck = updateCheck);
+
+    this.getPackagesWithChocolates();
   }
 
   createNewPackage(): void {
-    console.error("createNewChocolate()");
+    console.error("createNewPackage()");
     this.updateCheck = false;
     this.selectedPackage.Chocolates= this.selectedChocolates;
 
@@ -144,26 +158,22 @@ export class PackageViewComponent implements OnInit {
 
       for (var tempChocolate of this.selectedChocolates) {
 
-        //console.error("availableIngredientName -->" + availableIngredient.Name + "  === " + tempIngredient.Name + " <-- tempIngredienName" )
-        //console.error("availableIngredientId -->" + availableIngredient.IngredientId + " === " + tempIngredient.IngredientId +" <-- tempIngredientId" )        
-        this.isInPackage = (availableChocolate.ChocoalteId === tempChocolate.ChocoalteId);
+        //console.error("availableChocolateName -->" + availableChocolate.Name + "  === " + tempChocolate.Name + " <-- tempIngredienName" )
+        //console.error("availableChocolateID -->" + availableChocolate.ChocolateId + " === " + tempChocolate.ChocolateId +" <-- tempIngredientId" )        
+        this.isInPackage = (availableChocolate.ChocolateId === tempChocolate.ChocolateId);
 
         //console.error("isInChocolate -->  " + this.isInChocolate);
         if (this.isInPackage) break;
 
       };
 
-      //console.error("isInChocolate bevor try to push -> " + this.isInChocolate)
+      //console.error("isInPackage bevor try to push -> " + this.isInPackage)
       if (!this.isInPackage) {
-        //console.error("try to push Not in Chocolate ingredient" + tempIngredient.Name);
+       // console.error("try to push Not in Package Chocolate" + availableChocolate.Name);
         this.availableChocolates.push(availableChocolate);
       }
 
     }
-
-
-
-
 
   }
 
@@ -186,7 +196,8 @@ export class PackageViewComponent implements OnInit {
   setDefaultDemoData(): void {
     console.error("setDefaultDemoData()");
     //-TempData
-    //WrappingID = p.Wrapping.WrappingId, d526f03a - 29c5 - 4331 - b536 - 49bf4f3d4cf3   
+    //WrappingID = p.Wrapping.WrappingId, d526f03a - 29c5 - 4331 - b536 - 49bf4f3d4cf3
+    // Wrapping Name = wrap no. 1
     //Customer_ID = p.Customer.CustomerId, 9417ea8a - fa2e - 4172 - 83f4 - 00d2b400a1b9
     //Image = p.Image, http://
   
@@ -194,6 +205,7 @@ export class PackageViewComponent implements OnInit {
 
     this.selectedPackage.Wrapping = new Wrapping();
     this.selectedPackage.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
+    this.selectedPackage.Wrapping.Name = "wrap no. 1";
 
     this.selectedPackage.CreatedBy = new Customer();
     this.selectedPackage.CreatedBy.CustomerId = "e71a6869-7927-4c6d-ac1d-71858cb9f641";
@@ -212,6 +224,7 @@ export class PackageViewComponent implements OnInit {
       }
 
     }
+    this.packagePrice += 3;
 
   }
 

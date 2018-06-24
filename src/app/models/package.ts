@@ -13,6 +13,7 @@ export class Package {
   CreatedBy: Customer;
   Image: string;
   Chocolates: Chocolate[];
+  
   //Rating: Rating[];
   //Modified: Date;
   Price: Number;

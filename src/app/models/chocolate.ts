@@ -8,7 +8,7 @@ import { Wrapping } from "src/app/models/wrapping";
 
 export class Chocolate {
 
-  ChocoalteId: AAGUID;
+  ChocolateId: AAGUID;
   Name: string;
   Description: string;
   Available: boolean;
@@ -21,10 +21,10 @@ export class Chocolate {
   Wrapping: Wrapping;
   Price: Number;
 
-  public calculatePrice(): void {
+  //public calculatePrice(): void {
 
-    this.Price = 5;
-  };
+  //  this.Price = 5;
+  //};
 
   //Shape_ID = c.Shape.ShapeId,
   //CustomStyle_ID = c.CustomStyle.CustomStyleId,
