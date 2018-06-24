@@ -26,8 +26,8 @@ const httpOptions = {
 export class SynchronizerService {
 
 
-  //private serviceUrl = 'http://localhost:8090/AppServiceService/';  
-  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+  private serviceUrl = 'http://localhost:8090/AppServiceService/';  
+  //private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
 
 
 
