@@ -69,6 +69,7 @@ export class ChocolatesViewComponent implements OnInit {
   getChocolatesWithIngredients(): void {   
     this.synchronizerService.getChocolatesWithIngredients()
       .subscribe(chocolates => this.chocolates = chocolates);
+    //console.error(this.chocolates.entries);
 
     //for (var tempChocolate of this.chocolates) {
     //  tempChocolate.calculatePrice();
@@ -80,6 +81,7 @@ export class ChocolatesViewComponent implements OnInit {
   getShapes(): void {
     this.synchronizerService.getShapes()
       .subscribe(shapes => this.shapes = shapes);
+    //console.error(this.shapes.entries);
   }
 
 
@@ -161,6 +163,7 @@ export class ChocolatesViewComponent implements OnInit {
 
     this.synchronizerService.getIngredients()
       .subscribe(ingredients => this.tempIngredients = ingredients);
+    console.error(this.tempIngredients);
   
   }
 
