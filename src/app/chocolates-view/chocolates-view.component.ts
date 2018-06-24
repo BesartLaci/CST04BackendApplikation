@@ -9,6 +9,10 @@ import { SynchronizerService } from '../synchronizer.service';
 
 import { Chocolate } from 'src/app/models/chocolate';
 import { Ingredient } from 'src/app/models/ingridient';
+import { Shape } from 'src/app/models/shape';
+import { CustomStyle } from 'src/app/models/customStyle';
+import { Wrapping } from 'src/app/models/wrapping';
+import { Customer } from 'src/app/models/customer';
 
 @Component({
   selector: 'app-chocolates-view',
@@ -28,13 +32,18 @@ export class ChocolatesViewComponent implements OnInit {
   availableIngredients: Ingredient[];
   selectedIngredients: Ingredient[];
   isInChocolate: boolean;
-  
+
+  shapes: Shape[];
+
+
 
 
   constructor(
     private synchronizerService: SynchronizerService
         
   ) {
+
+    this.availableIngredients = new Array<Ingredient>();
     console.error('ChocolatesViewComponent constructor mit synchronizerService');
   }
 
@@ -42,9 +51,10 @@ export class ChocolatesViewComponent implements OnInit {
     //this.getIsAlive();
     this.selectedChocolate = new Chocolate();
     this.getChocolatesWithIngredients();
+    this.getShapes();
     this.availableIngredients = new Array<Ingredient>();
-    this.getIngredientsForAvailableIngredients();
-  }
+    this.getIngredientsForAvailableIngredients();    
+  } 
 
     ////////// Helper Methods - Eror Handling //////////
 
@@ -58,7 +68,18 @@ export class ChocolatesViewComponent implements OnInit {
 
   getChocolatesWithIngredients(): void {   
     this.synchronizerService.getChocolatesWithIngredients()
-      .subscribe(chocolates => this.chocolates = chocolates);   
+      .subscribe(chocolates => this.chocolates = chocolates);
+
+    //for (var tempChocolate of this.chocolates) {
+    //  tempChocolate.calculatePrice();
+    //  console.error("Calculate Price for " + tempChocolate.Name + " --> € " + tempChocolate.Price);
+    //};
+
+  }
+
+  getShapes(): void {
+    this.synchronizerService.getShapes()
+      .subscribe(shapes => this.shapes = shapes);
   }
 
 
@@ -67,11 +88,11 @@ export class ChocolatesViewComponent implements OnInit {
   setSelectedChocolate(tempChocolate: Chocolate): void {
 
     if (tempChocolate != null) {
-      //this.getChocolatesWithIngredients();
+      
       this.selectedChocolate = tempChocolate;
+      this.setDefaultDemoData();
       this.selectedIngredients = this.selectedChocolate.Ingredients;
 
-      //this.tempIngredients = new Array<Ingredient>();
       this.availableIngredients = new Array<Ingredient>();
 
       this.getIngredientsForAvailableIngredients();
@@ -102,20 +123,41 @@ export class ChocolatesViewComponent implements OnInit {
 
 
   saveSelectedChocolate():void {
-    //TO DO
+    this.updateCheck = false;
+    this.selectedChocolate.Ingredients = this.selectedIngredients;
+
+    console.error("--------  TRY TO Update Chocolate ------")
+
+    this.synchronizerService.updateChocolate(this.selectedChocolate)
+      .subscribe(updateCheck => this.updateCheck = updateCheck);
+
+    this.getChocolatesWithIngredients();
+
+  }
+
+  createNewChocolate(): void {
+
+    this.updateCheck = false;
+    this.selectedChocolate.Ingredients = this.selectedIngredients;
+
+    console.error("--------  TRY TO Create new Chocolate ------")
+
+    this.synchronizerService.createNewChocolate(this.selectedChocolate)
+      .subscribe(updateCheck => this.updateCheck = updateCheck);
+
+    this.getChocolatesWithIngredients();
   }
 
   enableDisableSelecetedChocolate(): void {
-    if (this.selectedChocolate.Available === true)
-      { this.selectedChocolate.Available = false }
-    else { this.selectedChocolate.Available = true }
+
+    this.selectedChocolate.Available = !this.selectedChocolate.Available;
   }
 
 
   ////////// Chocolate-View Methods //////////
 
   getIngredientsForAvailableIngredients(): void {
-    console.error("getIngredientsForAvailableIngredients");
+    console.error("getIngredientsForAvailableIngredients()");
 
     this.synchronizerService.getIngredients()
       .subscribe(ingredients => this.tempIngredients = ingredients);
@@ -131,18 +173,18 @@ export class ChocolatesViewComponent implements OnInit {
       
       for (var tempIngredient of this.selectedIngredients) {
 
-        console.error("availableIngredientName -->" + availableIngredient.Name + "  === " + tempIngredient.Name + " <-- tempIngredienName" )
-        console.error("availableIngredientId -->" + availableIngredient.IngredientId + " === " + tempIngredient.IngredientId +" <-- tempIngredientId" )        
+        //console.error("availableIngredientName -->" + availableIngredient.Name + "  === " + tempIngredient.Name + " <-- tempIngredienName" )
+        //console.error("availableIngredientId -->" + availableIngredient.IngredientId + " === " + tempIngredient.IngredientId +" <-- tempIngredientId" )        
         this.isInChocolate = (availableIngredient.IngredientId === tempIngredient.IngredientId);
 
-        console.error("isInChocolate -->  " + this.isInChocolate);
+        //console.error("isInChocolate -->  " + this.isInChocolate);
         if (this.isInChocolate) break;
         
       };
 
-      console.error("isInChocolate bevor try to push -> " + this.isInChocolate)
+      //console.error("isInChocolate bevor try to push -> " + this.isInChocolate)
       if (!this.isInChocolate) {
-        console.error("try to push Not in Chocolate ingredient" + tempIngredient.Name);
+        //console.error("try to push Not in Chocolate ingredient" + tempIngredient.Name);
         this.availableIngredients.push(availableIngredient);   
       }
          
@@ -151,17 +193,44 @@ export class ChocolatesViewComponent implements OnInit {
   }
 
   deleteFromAvailableIngredients(tempIngredient: Ingredient): void {
-    console.error(tempIngredient.IngredientId);
-    
-    var index = this.availableIngredients.indexOf(tempIngredient);
-    console.error(index)
-    console.error(this.availableIngredients.splice(index, 1));
+     
+    var index = this.availableIngredients.indexOf(tempIngredient); 
+    this.availableIngredients.splice(index, 1);
     
   }
 
+
   deleteFromSelectedIngredients(tempIngredient: Ingredient): void {
+
     var index = this.selectedIngredients.indexOf(tempIngredient);
     this.selectedIngredients.splice(index, 1);
+
+  }
+
+      //generate Demo Date to push new Chocolate
+  setDefaultDemoData(): void {
+  //-TempData
+  //CustumStyle: CustumStyle 9417ea8a-fa2e-4172-83f4-00d2b400a1b9
+  //Image: string; http://
+  //Wrapping: Wrapping;  d526f03a-29c5-4331-b536-49bf4f3d4cf3
+  //Customer e71a6869-7927-4c6d-ac1d-71858cb9f641 / Backend
+  //ShapeID e26aa70b-cee9-4eee-8690-c1ebe98f1aeb
+
+    this.selectedChocolate.CustomStyle = new CustomStyle();
+    this.selectedChocolate.CustomStyle.CustomStyleId = "59030bdb-8420-4f78-b750-506a702b8eef";
+
+    this.selectedChocolate.Image = "http://";
+
+    this.selectedChocolate.Wrapping = new Wrapping();
+    this.selectedChocolate.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
+
+    this.selectedChocolate.Shape = new Shape();
+    this.selectedChocolate.Shape.ShapeId = "e26aa70b-cee9-4eee-8690-c1ebe98f1aeb";
+
+    this.selectedChocolate.CreatedBy = new Customer();
+    this.selectedChocolate.CreatedBy.CustomerId = "e71a6869-7927-4c6d-ac1d-71858cb9f641";
+
+
   }
 
 
@@ -174,5 +243,8 @@ export class ChocolatesViewComponent implements OnInit {
     }
 
   }
+
+
+ 
 
 }

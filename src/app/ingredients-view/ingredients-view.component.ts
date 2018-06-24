@@ -21,7 +21,7 @@ export class IngredientsViewComponent implements OnInit {
 
   constructor(
     private synchronizerService: SynchronizerService,
-    //private location: Location
+    
     ) {
       console.error('IngredientsViewComponent constructor mit synchronizerService');
     }
@@ -29,6 +29,7 @@ export class IngredientsViewComponent implements OnInit {
   ngOnInit() {
     console.error('ngOnInit start');
     this.getIngredients();
+    this.selectedIngredient = new Ingredient();
     this.getIsAlive();
     console.error('ngOnInit end');
   }
@@ -62,22 +63,29 @@ export class IngredientsViewComponent implements OnInit {
 
   }
 
-    saveSelectedIngredient(): void {
+  saveSelectedIngredient(): void {
       this.synchronizerService.updateIngredient(this.selectedIngredient)
         .subscribe(updateCheck => this.updateCheck = updateCheck);
-      //this.getIngredients();
+      this.getIngredients();
   }
 
   createNewIngredient(): void {
-    this.selectedIngredient.Available = true;
-    this.selectedIngredient.Description = 'new Ingredient created';
+    this.updateCheck = false;
+    this.synchronizerService.createNewIngredient(this.selectedIngredient)
+      .subscribe(updateCheck => this.updateCheck = updateCheck);
+    this.getIngredients();
+
           
   }  
 
   enableDisableSelecetedIgredient(): void {
-    if (this.selectedIngredient.Available === true)
-    { this.selectedIngredient.Available = false }
-    else { this.selectedIngredient.Available = true }
+
+    this.selectedIngredient.Available = !this.selectedIngredient.Available;
+
+    //if (this.selectedIngredient.Available === true)
+    //{ this.selectedIngredient.Available = false }
+    //else { this.selectedIngredient.Available = true }
+
   }
 
 

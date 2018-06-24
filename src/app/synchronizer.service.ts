@@ -8,6 +8,7 @@ import { Ingredient } from 'src/app/models/ingridient';
 import { Chocolate } from 'src/app/models/chocolate';
 import { Package } from 'src/app/models/package';
 import { Order } from 'src/app/models/order';
+import { Shape } from 'src/app/models/shape';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,8 +25,8 @@ const httpOptions = {
 export class SynchronizerService {
 
 
-  //private serviceUrl = 'http://localhost:8733/AppServiceService/';  
-  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+  private serviceUrl = 'http://localhost:8090/AppServiceService/';  
+  //private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
 
 
 
@@ -87,7 +88,7 @@ export class SynchronizerService {
   }
 
   getPackagesWithChocolates(): Observable<Package[]> {
-    return this.http.get<Package[]>(this.serviceUrl + 'QuerytPackagesWithChocolates')
+    return this.http.get<Package[]>(this.serviceUrl + 'QueryPackagesWithChocolatesAndIngredients')
       .pipe(
       catchError(this.handleError('getChocolates', []))
       );
@@ -100,6 +101,13 @@ export class SynchronizerService {
       );
   }
 
+  getShapes(): Observable<Shape[]> {
+    return this.http.get<Shape[]>(this.serviceUrl + 'QueryShapes')
+      .pipe(
+      catchError(this.handleError('getShapes', []))
+      );
+  }
+
 
 
   ////////// Update Methods //////////
@@ -107,13 +115,38 @@ export class SynchronizerService {
 
   updateIngredient(ingredient: Ingredient): Observable<boolean> {
 
-
     return this.http.post(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
       //tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateIngredient'))
     );
   }
 
+  updateChocolate(chocolate: Chocolate): Observable<boolean> {
 
+    return this.http.post(this.serviceUrl + 'UpdateChocolate', chocolate, httpOptions).pipe(
+      //tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateChocolate'))
+    );
+  }
+
+  ////////// Insert Methods //////////
+
+  createNewIngredient(newIngredient: Ingredient): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertIngredient', newIngredient, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewIngredient'))
+    );
+  }
+
+  createNewChocolate(newChocolate: Chocolate): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertChocolate', newChocolate, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewChocolate '))
+    );
+  }
+
+  createNewPackage(newPackage: Package): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertChocolate', newPackage, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewPackage '))
+    );
+  }
 
 }

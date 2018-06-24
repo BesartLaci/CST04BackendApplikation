@@ -1,4 +1,6 @@
 import { Chocolate } from "src/app/models/chocolate";
+import { Wrapping } from "src/app/models/wrapping";
+import { Customer } from "src/app/models/customer";
 
 
 export class Package {
@@ -6,13 +8,14 @@ export class Package {
   PackageId: AAGUID;
   Name: string;
   Description: string;
-  //Wrapping: Wrapping;
+  Wrapping: Wrapping;
   Available: boolean;
-  //Customer: Customer;
-  //Image: string;
+  CreatedBy: Customer;
+  Image: string;
   Chocolates: Chocolate[];
   //Rating: Rating[];
   //Modified: Date;
+  Price: Number;
 
 }
 
