@@ -1,69 +1,79 @@
+<!--Left Container problem Orders-->
+<div class="col-sm-3">
+  <div *ngIf="tempOrders">
+
+    <!--Left Container delayed Orders-->
+    <div>
+      <p>Paused Orders:</p>
+      <div class="order-view-body-element order-view-list">
+        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+          <div *ngIf="order.Status.OrderStatusId == 'e9ea67d5-bee2-4372-9abb-408a2afe3640'">
+            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Left Container paused Orders-->
+    <div>
+      <p>Delayed Orders:</p>
+      <div class="order-view-body-element order-view-list">
+        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+          <div *ngIf="order.Status.OrderStatusId == '83d176ef-0c09-4fdb-9e8e-3f422bed7867'">
+            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--Detail View-->
 <div class="col-sm-6">
-  <p>Open Orders:</p>
-  <div class="order-view-body-element order-view-list">
-    <div class="table-striped" style="width:100%; margin:0" *ngIf="newOrders" >
-      <table class="table">
-        <tr>
-          <th>Order ID</th>
-          <th>Note</th>
-          <th>Delivery Date</th>
-          <th>OrderStatusId</th>
-        </tr>
-        <tr *ngFor="let order of newOrders">
-          <td>{{order.OrderId}}</td>
-          <td>{{order.Note}}</td>
-          <td>{{order.DateOfDelivery}}</td>
-           <td>{{order.Status.OrderStatusId}}</td>
-        </tr>
-      </table>
+  <div *ngIf="selectedOrder">
+    <p>Detail View:</p>
+    <div class="order-view-OrderDetails-element">
+      <div class="form-group form-group-element">
+        <p><label>Order Id:</label>   {{selectedOrder.OrderId}}</p>
+        <p><label>Date of Delivery:</label>   {{selectedOrder.DateOfDelivery}}</p>
+        <p><label>Date of Order:</label>   {{selectedOrder.DateOfOrder}}</p>
+        <p><label>Note:</label>   {{selectedOrder.Note}}</p>
+        <p><label>Status:</label>   {{selectedOrder.Status.Decription}}</p>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="col-sm-6">
-  <p>Detail View:</p>
-</div>
+<!--Left Container progess and open Orders-->
+<div class="col-sm-3">
+  <div *ngIf="tempOrders">
 
-<div class="col-sm-6">
-  <p>Paused Orders:</p>
-  <div class="order-view-body-element order-view-list">
-    <div class="table-striped" style="width:100%; margin:0">
-      <table class="table">
-        <tr>
-          <th>Order ID</th>
-          <th>Note</th>
-          <th>Delivery Date</th>
-          <th>OrderStatusId</th>
-        </tr>
-        <tr *ngFor="let order of pausedOrders">
-          <td>{{order.OrderId}}</td>
-          <td>{{order.Note}}</td>
-          <td>{{order.DateOfDelivery}}</td>
-          <td>{{order.Status.OrderStatusId}}</td>
-        </tr>
-      </table>
+    <!--progress Orders-->
+    <div>
+      <p>Progess Order:</p>
+      <div class="order-view-list order-view-Orders-elment">
+        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+          <div *ngIf="order.Status.OrderStatusId == '1d7ed2c9-e273-49e7-b7fd-b014f71a8a40'">
+            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!--new Orders-->
+    <div>
+      <p>Open Orders:</p>
+      <div class="order-view-list">
+        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+          <div *ngIf="order.Status.OrderStatusId == '0c16612c-9ad3-4ffe-bb58-3ea434e0f91f'">
+            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="col-sm-6">
-  <p>Delayed Orders:</p>
-  <div class="order-view-body-element order-view-list">
-    <div class="table-striped" style="width:100%; margin:0">
-      <table class="table">
-        <tr>
-          <th>Order ID</th>
-          <th>Note</th>
-          <th>Delivery Date</th>
-          <th>OrderStatusId</th>
-        </tr>
-        <tr *ngFor="let order of orders">
-          <td>{{order.OrderId}}</td>
-          <td>{{order.Note}}</td>
-          <td>{{order.DateOfDelivery}}</td>
-          <td>{{order.Status.OrderStatusId}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
+
