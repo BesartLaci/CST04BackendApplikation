@@ -10,6 +10,7 @@ import { Package } from 'src/app/models/package';
 import { Order } from 'src/app/models/order';
 import { Shape } from 'src/app/models/shape';
 import { Customer } from 'src/app/models/customer';
+import { Wrapping } from 'src/app/models/wrapping';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -117,32 +118,33 @@ export class SynchronizerService {
       );
   }
 
+  getWrappings(): Observable<Wrapping[]> {
+    return this.http.get<Wrapping[]>(this.serviceUrl + 'QueryWrappings')
+      .pipe(
+      catchError(this.handleError('getWrappings', []))
+      );
+  }
+
 
 
   ////////// Update Methods //////////
 
 
   updateIngredient(ingredient: Ingredient): Observable<boolean> {
-
-    return this.http.post(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
-      //tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateIngredient'))
+    return this.http.post(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions)
+      .pipe(catchError(this.handleError<any>('updateIngredient'))
     );
   }
 
   updateChocolate(chocolate: Chocolate): Observable<boolean> {
-
-    return this.http.post(this.serviceUrl + 'UpdateChocolate', chocolate, httpOptions).pipe(
-      //tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateChocolate'))
+    return this.http.post(this.serviceUrl + 'UpdateChocolate', chocolate, httpOptions)
+      .pipe(catchError(this.handleError<any>('updateChocolate'))
     );
   }
 
-  updatePackage(updatePackage: Chocolate): Observable<boolean> {
-
-    return this.http.post(this.serviceUrl + 'UpdateChocolate', updatePackage, httpOptions).pipe(
-      //tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updatePackage'))
+  updatePackage(updatePackage: Package): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'UpdatePackage', updatePackage, httpOptions)
+      .pipe(catchError(this.handleError<any>('updatePackage'))
     );
   }
 
@@ -164,6 +166,20 @@ export class SynchronizerService {
     return this.http.post(this.serviceUrl + 'InsertPackage', newPackage, httpOptions).pipe(
       catchError(this.handleError<any>('createNewPackage '))
     );
+  }
+
+  onUpload(selectedFile: File) {
+    const uploadData = new FormData();
+    uploadData.append('myFile', selectedFile, selectedFile.name);
+    this.http.post('my-backend.com/file-upload', uploadData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        console.log(event); // handle event here
+      });
+
+
   }
 
 }

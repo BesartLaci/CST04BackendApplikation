@@ -4,17 +4,21 @@
 }
 
 .ingredients-view-list {
-  overflow: auto;
+  overflow: hidden;
   border: 1px groove #000;
+  overflow: auto;
+  
 }
 
 .ingredients-view-ingredientsList-element {
   height: 38vw;
   margin: auto;
+
 }
 
+
 .ingredient-view-ingredientDetails-element {
-  height: 38vw;
+  /*height: 38vw;*/
   margin: auto;
 }
 
@@ -47,11 +51,14 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  /*border-radius: 100%;*/
+  crop: auto;
+  margin-bottom:10px;
 }
 
 
 ingredients-view-ingredientDetailsProperties-element {
-  height: 38vw;
+  /*height: 38vw;*/
 }
 
 

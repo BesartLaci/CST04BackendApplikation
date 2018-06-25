@@ -1,13 +1,22 @@
 <!-- Left Body Content (List of all Packages) -->
 <div class="col-sm-3" >
   <div>
-    <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> ingredients: </label>
+    <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> Fillings: </label>
   </div>
 
   <div class="ingredients-view-ingredientsList-element ingredients-view-list">
     <div *ngIf="ingredients">
       <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of ingredients">
-        <a (click)="setSelectedIngredient(ingredient)" class="list-group-item"> {{ingredient.Name}}</a>
+        <div>
+          <a *ngIf="ingredient.Available && ingredient.Type == 'Filling'" (click)="setSelectedIngredient(ingredient)" class="list-group-item"> {{ingredient.Name}} </a>          
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ingredients">
+      <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of ingredients">
+        <div >
+          <a *ngIf="!ingredient.Available && ingredient.Type == 'Filling'" (click)="setSelectedIngredient(ingredient)" class="list-group-item"> \--- {{ingredient.Name}}  </a>
+        </div>
       </div>
     </div>
   </div>
@@ -19,9 +28,16 @@
 
   <!--Image-->
   <div class="col-sm-12 ingredients-view-image"></div>
+
   <div style="text-align:center">
-    <button type="button" class="btn btn-default" style="width: 33%; position: center">upload Image</button>
+    
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+
+    <button type="button" class="btn btn-default" style="margin:auto" (click)="fileInput.click()">Select Image</button>
+   <!-- <button type="button" class="btn btn-default" style="margin:auto" (click)="onUpload()">Upload!</button>-->
+
   </div>
+
  
   <!--Ingredient Details-->
   <div class="col-sm-12 ingredient-view-ingredientDetailsProperties-element" *ngIf="selectedIngredient">
@@ -31,8 +47,24 @@
       <div class="col-sm-6">
         <input class="form-control" [(ngModel)]="selectedIngredient.Name" required />
       </div><!--placeholder="name"-->
-      <div *ngIf="!updateCheck" class="col-lg-3">no update</div>
-      <div *ngIf="updateCheck" class="col-lg-3">Update = {{updateCheck}}</div>
+      <!--<div *ngIf="!updateCheck" class="col-lg-3">no update</div>
+    <div *ngIf="updateCheck" class="col-lg-3">Update = {{updateCheck}}</div>-->
+    </div>
+
+    <div class="form-group form-group-element">
+      <label class="col-sm-3"> Type: </label>
+      <div class="col-sm-6">
+
+        <select class="form-control" *ngIf="selectedIngredient"
+                [(ngModel)]="selectedIngredient.Type">
+          <option *ngFor="let type of ingredientTypes"
+                  [value]="type">
+            {{type}}
+          </option>
+        </select>
+
+      </div>
+      <div class="col-sm-3"></div>
     </div>
 
     <div class="form-group form-group-element">
@@ -47,17 +79,14 @@
       <div class="col-sm-3"></div>
     </div>
 
-    <div class="form-group form-group-element">
-      <label class="col-sm-3"> Type: </label>
-      <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.Type" /></div>
-      <div class="col-sm-3"></div>
-    </div>
 
-    <div class="form-group form-group-element">
-      <label class="col-sm-3"> UnitType: </label>
-      <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.UnitType" /></div>
-      <div class="col-sm-3"></div>
-    </div>
+
+    <!--<div class="form-group form-group-element">
+    <label class="col-sm-3"> UnitType: </label>
+    <div class="col-sm-6"><input class="form-control" [(ngModel)]="selectedIngredient.UnitType" /></div>
+    <div class="col-sm-3"></div>
+  </div>-->
+
     <div class="form-group form-group-element">
       <label class="col-sm-3">Description: </label>
       <textarea class="form-control col-sm-9" [(ngModel)]="selectedIngredient.Description"></textarea>
@@ -67,7 +96,7 @@
 
     <!--Button Container-->
     <div class="col-sm-12 ingredient-view-ingredientButtons-element">
-      <div class="form-group form-group-element ">
+      <div *ngIf="selectedIngredient" class="form-group form-group-element ">
         <button type="button" class="btn btn-default col-sm-4" (click)="createNewIngredient()">Create New</button>
         <button type="button" class="btn btn-default col-sm-4" (click)="saveSelectedIngredient()">Save</button>
         <button type="button" class="btn btn-default col-sm-4" (click)="enableDisableSelecetedIgredient()">Enable/Disable</button>
@@ -77,32 +106,29 @@
 </div>
 
 
-<!-- Right Body Content (Lists all parts of package) -->
-<div class="col-sm-3 ingredients-view-chocolateIngredients-element">
-
-  <!--List of selected Chocolates-->
+<!-- Right Body Content (Lists all Base Types) -->
+<div class="col-sm-3">
   <div>
-    <label class="col-sm-12" style="margin-bottom:5px;">  </label>
-  </div>
-  <div class="ingredients-view-selectedIngredients-element chocolate-view-list">
-    <!--<div *ngIf="selectedIngredients">
-      <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of selectedIngredients">
-        <a (click)="putInAivailableIngredients(ingredient)" class="list-group-item">{{ingredient.Name}} | {{ingredient.Type}} | € {{ingredient.Price}}</a>
-      </div>
-    </div>-->
+    <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> Base: </label>
   </div>
 
+  <div class="ingredients-view-ingredientsList-element ingredients-view-list">
 
-  <!--List of available Chocolates-->
-  <div>
-    <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> </label>
-  </div>
-  <div class="ingredients-view-availableIngredients-element chocolate-view-list">
-    <!--<div *ngIf="availableIngredients">
-      <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of availableIngredients">
-        <a (click)="putInSelectedIngredients(ingredient)" class="list-group-item">{{ingredient.Name}} | {{ingredient.Type}} | € {{ingredient.Price}}</a>
+    <div *ngIf="ingredients">
+      <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of ingredients">
+        <div>
+          <a *ngIf="ingredient.Available && ingredient.Type == 'Base'" (click)="setSelectedIngredient(ingredient)" class="list-group-item"> {{ingredient.Name}} </a>
+        </div>
       </div>
-    </div>-->
+    </div>
+
+    <div *ngIf="ingredients">
+      <div class="list-group" style="width:100%; margin:0" *ngFor="let ingredient of ingredients">
+        <div>
+          <a *ngIf="!ingredient.Available && ingredient.Type == 'Base'" (click)="setSelectedIngredient(ingredient)" class="list-group-item"> \--- {{ingredient.Name}} </a>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

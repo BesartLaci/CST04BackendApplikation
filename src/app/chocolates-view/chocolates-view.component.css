@@ -40,6 +40,9 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  /*border-radius: 100%;*/
+  crop: auto;
+  margin: 10px;
 }
 
 chocolate-view-ChocolateDetailsProperties-element {

@@ -11,6 +11,6 @@
     "\\src\\app\\order-activities-view",
     "\\src\\app\\package-view"
   ],
-  "SelectedNode": "\\src\\app\\models\\package.ts",
+  "SelectedNode": "\\src\\app\\package-view\\package-view.component.html",
   "PreviewInSolutionExplorer": false
 }
