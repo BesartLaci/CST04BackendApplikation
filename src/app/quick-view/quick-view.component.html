@@ -2,26 +2,24 @@
 <div class="quick-view-stats">
 
   <div class='col-sm-2'>
-    StartDate: <input type="date" value="{{startDate}}" />
+    StartDate: <input type="date" value="{{startDate |  date:'yyyy-MM-dd'}}" (keyup)="selectNewStartDate($event)"/>
   </div>
 
   <div class='col-sm-2'>
-    <p>End Date: <input type="date" value="{{endDate}}" /></p>
+    <p>End Date: <input type="date" value="{{today |  date:'yyyy-MM-dd'}}" (keyup)="selectNewtoday($event)"/></p>
   </div>
 
   <div class='col-sm-2'>
-    OpenOrders:<p>{{x}}</p>
+    <p>Sales: {{SumSales}} €</p>
+  </div>
+
+  <div class='col-sm-4'>
+    <p>Orders: {{countOpenOrders}} <span class='glyphicon glyphicon-log-in'></span>    {{countInProgressOrders}}  <span class='glyphicon glyphicon-refresh'></span> {{countPausedOrders}}    <span class='glyphicon glyphicon-pause'></span> {{countDelayedOrders}}    <span class='glyphicon glyphicon-flash'></span></p>
   </div>
 
   <div class='col-sm-2'>
-    <p>PausedOrders: {{countPausedOrders}}</p>
-  </div>
-
-  <div class='col-sm-2'>
-    <p>Sales: {{SumSales}}</p>
-  </div>
-
-  <div class='col-sm-2'>
-    <button class="default btn">Refresh</button>
+    <button (click)="refresh()" class="default btn">Refresh</button>
+    {{startDateNumber}}
+    {{todayNumber}}
   </div>
 </div>

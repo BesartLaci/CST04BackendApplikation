@@ -2,10 +2,10 @@ export class Customer {
 
 
   CustomerId: AAGUID;
-  //Firstname: string;
-  //Lastname: string;
-  //Mail: string;
-  //Phonenumber: string;
+  Firstname: string;
+  Lastname: string;
+  Mail: string;
+  Phonenumber: string;
 
 
 }
