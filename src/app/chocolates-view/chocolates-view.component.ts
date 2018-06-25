@@ -21,6 +21,8 @@ import { Customer } from 'src/app/models/customer';
 })
 export class ChocolatesViewComponent implements OnInit {
 
+  selectedFile: File;
+
   isAlive: boolean;
   updateCheck: boolean;
 
@@ -34,6 +36,8 @@ export class ChocolatesViewComponent implements OnInit {
   isInChocolate: boolean;
 
   shapes: Shape[];
+  wrappings: Wrapping[];
+
 
 
 
@@ -42,7 +46,8 @@ export class ChocolatesViewComponent implements OnInit {
     private synchronizerService: SynchronizerService
         
   ) {
-
+    this.shapes = new Array<Shape>();
+    this.wrappings = new Array<Wrapping>();
     this.availableIngredients = new Array<Ingredient>();
     console.error('ChocolatesViewComponent constructor mit synchronizerService');
   }
@@ -50,8 +55,12 @@ export class ChocolatesViewComponent implements OnInit {
   ngOnInit() {  
     //this.getIsAlive();
     this.selectedChocolate = new Chocolate();
+    this.selectedChocolate.Shape = new Shape();
+    this.selectedChocolate.Wrapping = new Wrapping();
+    this.getShapes();
+    this.getWrappings();
     this.getChocolatesWithIngredients();
-    //this.getShapes();
+    
     this.availableIngredients = new Array<Ingredient>();
     this.getIngredientsForAvailableIngredients();    
   } 
@@ -69,19 +78,17 @@ export class ChocolatesViewComponent implements OnInit {
   getChocolatesWithIngredients(): void {   
     this.synchronizerService.getChocolatesWithIngredients()
       .subscribe(chocolates => this.chocolates = chocolates);
-    //console.error(this.chocolates.entries);
-
-    //for (var tempChocolate of this.chocolates) {
-    //  tempChocolate.calculatePrice();
-    //  console.error("Calculate Price for " + tempChocolate.Name + " --> € " + tempChocolate.Price);
-    //};
-
   }
 
   getShapes(): void {
     this.synchronizerService.getShapes()
-      .subscribe(shapes => this.shapes = shapes);
-    //console.error(this.shapes.entries);
+      .subscribe(shapes => this.shapes = shapes)
+  }
+
+  getWrappings(): void {
+    this.synchronizerService.getWrappings()
+      .subscribe(wrappings => this.wrappings = wrappings);
+    
   }
 
 
@@ -94,6 +101,7 @@ export class ChocolatesViewComponent implements OnInit {
       this.selectedChocolate = tempChocolate;
       this.setDefaultDemoData();
       this.selectedIngredients = this.selectedChocolate.Ingredients;
+      
 
       this.availableIngredients = new Array<Ingredient>();
 
@@ -129,6 +137,7 @@ export class ChocolatesViewComponent implements OnInit {
     this.selectedChocolate.Ingredients = this.selectedIngredients;
 
     console.error("--------  TRY TO Update Chocolate ------")
+    console.error("--------  selectedChocolate.ShapeId ->" + this.selectedChocolate.Shape)
 
     this.synchronizerService.updateChocolate(this.selectedChocolate)
       .subscribe(updateCheck => this.updateCheck = updateCheck);
@@ -217,18 +226,14 @@ export class ChocolatesViewComponent implements OnInit {
   //Image: string; http://
   //Wrapping: Wrapping;  d526f03a-29c5-4331-b536-49bf4f3d4cf3
   //Customer e71a6869-7927-4c6d-ac1d-71858cb9f641 / Backend
-  //ShapeID e26aa70b-cee9-4eee-8690-c1ebe98f1aeb
-
+ 
     this.selectedChocolate.CustomStyle = new CustomStyle();
     this.selectedChocolate.CustomStyle.CustomStyleId = "59030bdb-8420-4f78-b750-506a702b8eef";
 
     this.selectedChocolate.Image = "http://";
 
-    this.selectedChocolate.Wrapping = new Wrapping();
-    this.selectedChocolate.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
-
-    this.selectedChocolate.Shape = new Shape();
-    this.selectedChocolate.Shape.ShapeId = "e26aa70b-cee9-4eee-8690-c1ebe98f1aeb";
+    //this.selectedChocolate.Wrapping = new Wrapping();
+    //this.selectedChocolate.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
 
     this.selectedChocolate.CreatedBy = new Customer();
     this.selectedChocolate.CreatedBy.CustomerId = "e71a6869-7927-4c6d-ac1d-71858cb9f641";
@@ -246,6 +251,14 @@ export class ChocolatesViewComponent implements OnInit {
     }
 
   }
+
+  //let you select a File from your local mashin
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+
+    this.synchronizerService.onUpload(this.selectedFile);
+  }
+
 
 
  

@@ -14,22 +14,29 @@ import { Ingredient } from 'src/app/models/ingridient';
 })
 export class IngredientsViewComponent implements OnInit {
 
+  selectedFile: File;
+
   ingredients: Ingredient[];
   @Input() selectedIngredient: Ingredient;
   isAlive: boolean;
   updateCheck: boolean;
 
+  ingredientTypes: string[];
+
   constructor(
     private synchronizerService: SynchronizerService,
     
-    ) {
+  ) {
+    this.ingredientTypes = new Array<string>();
       console.error('IngredientsViewComponent constructor mit synchronizerService');
     }
 
   ngOnInit() {
     console.error('ngOnInit start');
-    this.getIngredients();
     this.selectedIngredient = new Ingredient();
+    this.ingredientTypes.push("Filling");
+    this.ingredientTypes.push("Base");  
+    this.getIngredients();  
     this.getIsAlive();
     console.error('ngOnInit end');
   }
@@ -49,6 +56,9 @@ export class IngredientsViewComponent implements OnInit {
     this.synchronizerService.getIngredients()
       .subscribe(ingredients => this.ingredients = ingredients);
     console.error('getIngredients() durchgeführt');
+
+    this.ingredients.sort((a, b) => a.Name.localeCompare(b.Name));
+    //this.ingredients.sort();
   }
 
     ////////// Chocolate-View Methods //////////
@@ -67,15 +77,18 @@ export class IngredientsViewComponent implements OnInit {
   saveSelectedIngredient(): void {
       this.synchronizerService.updateIngredient(this.selectedIngredient)
         .subscribe(updateCheck => this.updateCheck = updateCheck);
-      this.getIngredients();
+
+    this.getIngredients();
+    
+    
   }
 
   createNewIngredient(): void {
     this.updateCheck = false;
     this.synchronizerService.createNewIngredient(this.selectedIngredient)
       .subscribe(updateCheck => this.updateCheck = updateCheck);
-    this.getIngredients();
 
+    this.getIngredients();
           
   }  
 
@@ -83,12 +96,23 @@ export class IngredientsViewComponent implements OnInit {
 
     this.selectedIngredient.Available = !this.selectedIngredient.Available;
 
-    //if (this.selectedIngredient.Available === true)
-    //{ this.selectedIngredient.Available = false }
-    //else { this.selectedIngredient.Available = true }
+  }
 
+  refresh(): void {
+    window.location.reload();
+   
+  }
+
+  
+
+  //let you select a File from your local mashin
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+
+    this.synchronizerService.onUpload(this.selectedFile);
   }
 
 
-
 }
+
+

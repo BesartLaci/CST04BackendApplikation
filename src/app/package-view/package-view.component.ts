@@ -32,10 +32,13 @@ export class PackageViewComponent implements OnInit {
   selectedChocolates: Chocolate[];
   isInPackage: boolean;
 
+  wrappings: Wrapping[];
+
   constructor(
     private synchronizerService: SynchronizerService,
 
   ) {
+    this.wrappings = new Array<Wrapping>();
     this.availableChocolates = new Array<Chocolate>();
     console.error('ChocolatesViewComponent constructor mit synchronizerService');
   }
@@ -44,6 +47,11 @@ export class PackageViewComponent implements OnInit {
   ngOnInit() {
     //this.getIsAlive();
     this.selectedPackage = new Package();
+    this.selectedPackage.Wrapping = new Wrapping();
+    this.selectedPackage.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
+    this.selectedPackage.Wrapping.Name = "wrap no. 1";
+    this.setDefaultDemoData();
+    this.getWrappings();
     this.getPackagesWithChocolates();
 
     this.availableChocolates = new Array<Chocolate>();
@@ -87,6 +95,12 @@ export class PackageViewComponent implements OnInit {
 
   }
 
+  getWrappings(): void {
+    this.synchronizerService.getWrappings()
+      .subscribe(wrappings => this.wrappings = wrappings);
+
+  }
+
 
   putInSelectedChocolates(tempChocolate): void {
     console.error("putInSelectedChocolates()");
@@ -106,14 +120,14 @@ export class PackageViewComponent implements OnInit {
   }
 
 
-  saveSelectedChocolate(): void {
+  saveSelectedPackage(): void {
     console.error("createNewPackage()");
     this.updateCheck = false;
     this.selectedPackage.Chocolates = this.selectedChocolates;
 
     console.error("--------  TRY TO Update Package ------")
 
-    this.synchronizerService.createNewPackage(this.selectedPackage)
+    this.synchronizerService.updatePackage(this.selectedPackage)
       .subscribe(updateCheck => this.updateCheck = updateCheck);
 
     this.getPackagesWithChocolates();
@@ -198,14 +212,14 @@ export class PackageViewComponent implements OnInit {
     //-TempData
     //WrappingID = p.Wrapping.WrappingId, d526f03a - 29c5 - 4331 - b536 - 49bf4f3d4cf3
     // Wrapping Name = wrap no. 1
-    //Customer_ID = p.Customer.CustomerId, 9417ea8a - fa2e - 4172 - 83f4 - 00d2b400a1b9
+    //Customer_ID = p.Customer.CustomerId, e71a6869-7927-4c6d-ac1d-71858cb9f641
     //Image = p.Image, http://
   
     this.selectedPackage.Image = "http://";
 
-    this.selectedPackage.Wrapping = new Wrapping();
-    this.selectedPackage.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
-    this.selectedPackage.Wrapping.Name = "wrap no. 1";
+    //this.selectedPackage.Wrapping = new Wrapping();
+    //this.selectedPackage.Wrapping.WrappingId = "d526f03a-29c5-4331-b536-49bf4f3d4cf3";
+    //this.selectedPackage.Wrapping.Name = "default";
 
     this.selectedPackage.CreatedBy = new Customer();
     this.selectedPackage.CreatedBy.CustomerId = "e71a6869-7927-4c6d-ac1d-71858cb9f641";
@@ -218,6 +232,7 @@ export class PackageViewComponent implements OnInit {
     this.packagePrice = 0;
 
     for (var tempChocolate of this.selectedChocolates) {
+      
 
       for (var tempIngredient of tempChocolate.Ingredients) {
         this.packagePrice += tempIngredient.Price;
