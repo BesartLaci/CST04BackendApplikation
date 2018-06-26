@@ -1,12 +1,12 @@
 .order-view-list {
   overflow: auto;
   border: 1px groove #000;
-  height: 20vw;
+  height: 19vw;
   margin-top: auto;
 }
 
 .order-view-OrderDetails-element {
-  
+  height: 38vw;
   margin: auto;
 }
 

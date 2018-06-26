@@ -10,7 +10,7 @@ import { OrderActivitiesViewComponent } from './order-activities-view/order-acti
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/app-dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/app-ingredients-view', pathMatch: 'full' },
   { path: 'app-dashboard', component: DashboardComponent },
   { path: 'packages-view', component: PackageViewComponent },
   { path: 'app-ingredients-view', component: IngredientsViewComponent },

@@ -11,6 +11,7 @@ import { Order } from 'src/app/models/order';
 import { Shape } from 'src/app/models/shape';
 import { Customer } from 'src/app/models/customer';
 import { Wrapping } from 'src/app/models/wrapping';
+import { OrderContent } from 'src/app/models/ordercontent';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,8 +28,8 @@ const httpOptions = {
 export class SynchronizerService {
 
 
- // private serviceUrl = 'http://localhost:8090/AppServiceService/';  
-  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+  private serviceUrl = 'http://localhost:8090/AppServiceService/';  
+ // private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
 
 
 
@@ -78,6 +79,14 @@ export class SynchronizerService {
     return this.http.get<Ingredient[]>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Ingredient[]>(`getHero id=${id}`))
+    );
+  }
+
+  getOrdersContentChocolateWithOrderId(id: AAGUID): Observable<OrderContent[]> {
+    const url = `${this.serviceUrl + 'QueryOrdersContentChocolate'}/${id}`;
+    return this.http.get<OrderContent[]>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<OrderContent[]>(`getHero id=${id}`))
     );
   }
 

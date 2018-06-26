@@ -33,17 +33,60 @@
 <div class="col-sm-6">
   <div *ngIf="selectedOrder">
     <p>Detail View:</p>
-    <div class="order-view-OrderDetails-element">
-      <div class="form-group form-group-element">
-        <p><label>Order Id:</label>   {{selectedOrder.OrderId}}</p>
-        <p><label>Date of Order:</label>   {{dateOfOrder |  date:'dd.MM.yyy'}}</p>
-        <p><label>Date of Delivery:</label>   {{dateOfDelivery|  date:'dd.MM.yyy'}}</p>
-        <p><label>Customer:</label>   {{selectedOrder.Customer.FirstName}} {{selectedOrder.Customer.LastName}}</p>
-        <p><label>Note:</label>   {{selectedOrder.Note}}</p>
-        <p><label>Status:</label>   {{selectedOrder.Status.Decription}}</p>
-      </div>
+    <div class="col-sm-12 order-view-OrderDetails-element">
+      <table class="table table-striped">
+        <tr>
+          <td>
+            <label>Order: Id</label>
+          </td>
+          <td>
+            {{selectedOrder.OrderId}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Date of Order:</label>
+          </td>
+          <td>
+            {{dateOfOrder |  date:'dd.MM.yyy'}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Date of Delivery:</label>
+          </td>
+          <td>
+            {{dateOfDelivery|  date:'dd.MM.yyy'}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Customer:</label>
+          </td>
+          <td>
+            {{selectedOrder.Customer.FirstName}} {{selectedOrder.Customer.LastName}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Note:</label>
+          </td>
+          <td>
+            <textarea>{{selectedOrder.Note}}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Status:</label>
+          </td>
+          <td>
+            {{selectedOrder.Status.Decription}}
+          </td>
+        </tr>
+      </table>
+
     </div>
-  </div>
+   </div>
 </div>
 
 <!--Left Container progess and open Orders-->
