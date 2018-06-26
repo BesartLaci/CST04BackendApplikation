@@ -8,28 +8,30 @@ import { Ingredient } from 'src/app/models/ingridient';
 import { Chocolate } from 'src/app/models/chocolate';
 import { Package } from 'src/app/models/package';
 import { Order } from 'src/app/models/order';
+import { Shape } from 'src/app/models/shape';
+import { Customer } from 'src/app/models/customer';
+import { Wrapping } from 'src/app/models/wrapping';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    //'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    //'Authorization': 'authkey',
-    //'userid': '1'
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Request-Headers': 'Content - Type',
     'Content-Type': 'application/json'
-    //'apikey': this.apikey,
-    //'appkey': this.appkey
   })
-  //params: new HttpParams().set('program_id', this.program_id)
+
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class SynchronizerService {
-  
-  private serviceUrl = 'http://localhost:8733/AppServiceService/';  // URL to web api
- 
+
+
+ // private serviceUrl = 'http://localhost:8090/AppServiceService/';  
+  private serviceUrl = 'http://wi-gate.technikum-wien.at:60935/AppServiceService/'; // URL to web api
+
+
+
   constructor(private http: HttpClient) { }
 
 
@@ -59,16 +61,24 @@ export class SynchronizerService {
       return of(result as T);
     };
   }
-  
+
 
   ////////// Get Methods //////////
-  
+
   // TODO: Wenn Server funktioniert, Ursache für Fehler suchen
   getIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.serviceUrl + 'QueryIngredients')
       .pipe(
       catchError(this.handleError('getIngredients', []))
       );
+  }
+
+  getIngredientsWithChocoladeId(id: AAGUID): Observable<Ingredient[]> {
+    const url = `${this.serviceUrl + 'QueryIngredientsByChocolateId'}/${id}`;
+    return this.http.get<Ingredient[]>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Ingredient[]>(`getHero id=${id}`))
+    );
   }
 
 
@@ -80,7 +90,7 @@ export class SynchronizerService {
   }
 
   getPackagesWithChocolates(): Observable<Package[]> {
-    return this.http.get<Package[]>(this.serviceUrl + 'QuerytPackagesWithChocolates')
+    return this.http.get<Package[]>(this.serviceUrl + 'QueryPackagesWithChocolatesAndIngredients')
       .pipe(
       catchError(this.handleError('getChocolates', []))
       );
@@ -93,18 +103,83 @@ export class SynchronizerService {
       );
   }
 
-
-
-    ////////// Update Methods //////////
-
-
-  updateIngredient(ingredient: Ingredient): Observable<boolean> {
-    return this.http.put(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions).pipe(
-      //tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateIngredient'))
+  getCustomerWithCustomer(id: AAGUID): Observable<Customer[]> {
+    const url = `${this.serviceUrl + 'QueryCustomerByCustomerId'}/${id}`;
+    return this.http.get<Customer[]>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Customer[]>(`getCustomer id=${id}`))
     );
   }
 
+  getShapes(): Observable<Shape[]> {
+    return this.http.get<Shape[]>(this.serviceUrl + 'QueryShapes')
+      .pipe(
+      catchError(this.handleError('getShapes', []))
+      );
+  }
 
+  getWrappings(): Observable<Wrapping[]> {
+    return this.http.get<Wrapping[]>(this.serviceUrl + 'QueryWrappings')
+      .pipe(
+      catchError(this.handleError('getWrappings', []))
+      );
+  }
+
+
+
+  ////////// Update Methods //////////
+
+
+  updateIngredient(ingredient: Ingredient): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'UpdateIngredient', ingredient, httpOptions)
+      .pipe(catchError(this.handleError<any>('updateIngredient'))
+    );
+  }
+
+  updateChocolate(chocolate: Chocolate): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'UpdateChocolate', chocolate, httpOptions)
+      .pipe(catchError(this.handleError<any>('updateChocolate'))
+    );
+  }
+
+  updatePackage(updatePackage: Package): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'UpdatePackage', updatePackage, httpOptions)
+      .pipe(catchError(this.handleError<any>('updatePackage'))
+    );
+  }
+
+  ////////// Insert Methods //////////
+
+  createNewIngredient(newIngredient: Ingredient): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertIngredient', newIngredient, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewIngredient'))
+    );
+  }
+
+  createNewChocolate(newChocolate: Chocolate): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertChocolate', newChocolate, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewChocolate '))
+    );
+  }
+
+  createNewPackage(newPackage: Package): Observable<boolean> {
+    return this.http.post(this.serviceUrl + 'InsertPackage', newPackage, httpOptions).pipe(
+      catchError(this.handleError<any>('createNewPackage '))
+    );
+  }
+
+  onUpload(selectedFile: File) {
+    const uploadData = new FormData();
+    uploadData.append('myFile', selectedFile, selectedFile.name);
+    this.http.post('my-backend.com/file-upload', uploadData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        console.log(event); // handle event here
+      });
+
+
+  }
 
 }

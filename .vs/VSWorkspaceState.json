@@ -1,14 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\e2e",
-    "\\e2e\\src",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\chocolates-view",
-    "\\src\\app\\ingredients-view",
-    "\\src\\app\\models"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\chocolates-view\\chocolates-view.component.css",
+  "SelectedNode": "\\src\\index.html",
   "PreviewInSolutionExplorer": false
 }

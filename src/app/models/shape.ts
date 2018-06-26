@@ -1,9 +1,9 @@
-
+ 
 export class Shape {
 
-  ShapeID: AAGUID;
+  ShapeId: AAGUID;
   Name: string;
-  ImageUri: string;
+  Image: string;
 
      
 }

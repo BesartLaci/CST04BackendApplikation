@@ -40,6 +40,9 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  /*border-radius: 100%;*/
+  crop: auto;
+  margin: 10px;
 }
 
 chocolate-view-ChocolateDetailsProperties-element {
@@ -53,9 +56,7 @@ chocolate-view-ChocolateButtons-element {
 .form-group-element {
   padding-top: 20px;
   padding-bottom: 20px;
-  /*padding:0;
-  display: flex;
-  align-items: center;*/
+ 
 }
 
 

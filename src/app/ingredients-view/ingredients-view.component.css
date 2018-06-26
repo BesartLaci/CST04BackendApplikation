@@ -4,25 +4,76 @@
 }
 
 .ingredients-view-list {
+  overflow: hidden;
+  border: 1px groove #000;
   overflow: auto;
-  /*width: 20%;*/
-  border: 1px solid #000;
+  
 }
 
-.ingredients-view-body-element {
-  height: 35vw;
-  padding: 0;
+.ingredients-view-ingredientsList-element {
+  height: 38vw;
+  margin: auto;
+
+}
+
+
+.ingredient-view-ingredientDetails-element {
+  /*height: 38vw;*/
+  margin: auto;
+}
+
+/*the right hiden element*/
+.ingredients-view-chocolateIngredients-element {
+  height: 38vw;
+  margin: auto;
+}
+
+/*.ingredients-view-selectedIngredient-element {
+  height: 18vw;
+  margin-top: auto;
+}*/
+
+/*copy from Chocolate View for Placeholder*/
+.ingredients-view-selectedIngredients-element {
+  height: 18vw;
+  margin-top: auto;
+}
+
+/*copy from Chocolate View for Placeholder*/
+.ingredients-view-availableIngredients-element {
+  height: 19vw;
+  margin-top: auto;
 }
 
 .ingredients-view-image {
   background-image: url("http://keyingredientseurope.com/wp-content/uploads/2015/09/key-ingredients-about-us.jpg");
-  height: 14vw;
+  height: 20vw;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  /*border-radius: 100%;*/
+  crop: auto;
+  margin-bottom:10px;
 }
 
-.form-group-element {
-  padding-top: 15px;
-  padding-bottom: 15px;
+
+ingredients-view-ingredientDetailsProperties-element {
+  /*height: 38vw;*/
 }
+
+
+/*.ingredients-view-body-element {
+  height: 35vw;
+  padding: 0;
+}*/
+
+
+
+.form-group-element {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+
+
