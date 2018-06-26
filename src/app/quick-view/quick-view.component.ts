@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
 import { SynchronizerService } from 'src/app/synchronizer.service';
+import { Package } from 'src/app/models/package';
+import { OrderContent } from 'src/app/models/ordercontent';
+import { Ingredient } from 'src/app/models/ingridient';
 
 @Component({
   selector: 'app-quick-view',
@@ -19,13 +22,26 @@ export class QuickViewComponent implements OnInit {
   countInProgressOrders: number;
   countDelayedOrders: number;
   Orders: Order[];
+  packages: Package[];
+  OrderContentList: OrderContent[];
+  IngredientList: Ingredient[];
+  packagePrice: number;
  
 
   constructor(private synchronizerService: SynchronizerService)
   {
+    this.OrderContentList = new Array<OrderContent>();
+    this.Orders = new Array<Order>();
+    this.IngredientList = new Array<Ingredient>();
+    this.packages = new Array<Package>();
   }
 
   ngOnInit() {
+    this.OrderContentList = new Array<OrderContent>();
+    this.Orders = new Array<Order>();
+    this.IngredientList = new Array<Ingredient>();
+    this.packages = new Array<Package>();
+    this.setSales();
     this.getStartDate();
     this.getDateNumbers();
     this.countOpenOrders = 0;
@@ -35,6 +51,48 @@ export class QuickViewComponent implements OnInit {
     this.SumSales = 0;
     this.getDateNumbers();
     this.refresh();
+  }
+
+  setSales(): void {
+
+    for (var tempOrder of this.Orders) {
+      var temp1 = tempOrder.DateOfOrder.split('(');
+      var temp2 = temp1[1].split('+');
+      var dateOfOrder: number = parseInt(temp2[0]);
+      console.error(dateOfOrder);
+      console.error('drinnen1');
+
+      if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
+        console.error('drinnen2');
+        this.getOrderContentChocolates(tempOrder.OrderId);
+        console.error(this.OrderContentList)
+
+        for (var tempOrderContent of this.OrderContentList) {
+
+          console.error(tempOrderContent.Chocolate.ChocolateId);
+          if (tempOrderContent.Chocolate.ChocolateId) {
+            this.getIngredientsByChocolateId(tempOrderContent.Chocolate.ChocolateId);
+            console.error('drinnen3')
+
+            for (var tempIngredient of this.IngredientList) {
+              console.error('drinnen4')
+              this.SumSales += tempIngredient.Price;
+              console.error(this.SumSales.toFixed(2))
+            }
+          }
+        }  
+      }
+    }
+  }
+
+  getIngredientsByChocolateId(id): void {
+    this.synchronizerService.getIngredientsWithChocoladeId(id)
+      .subscribe(ingredients => this.IngredientList = ingredients);
+  }
+
+  getOrderContentChocolates(id): void {
+    this.synchronizerService.getOrdersContentChocolateWithOrderId(id)
+      .subscribe(ordercontent => this.OrderContentList = ordercontent);
   }
 
   getDateNumbers(): void {
@@ -67,16 +125,18 @@ export class QuickViewComponent implements OnInit {
     this.setSales();
   }
 
-  setSales(): void {
-    for (var tempOrder of this.Orders) {
-      this.SumSales += 0;
-    }
-  }
 
   setCounterOpenorders(): void {
     for (var tempOrder of this.Orders) {
       if (tempOrder.Status.Decription === 'New') {
-        this.countOpenOrders += 1;
+        var temp1 = tempOrder.DateOfOrder.split('(');
+        var temp2 = temp1[1].split('+');
+        var dateOfOrder: number = parseInt(temp2[0]);
+        //console.error(dateOfOrder);
+
+        if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
+          this.countOpenOrders += 1;
+        }
       }
     }
   }
@@ -88,7 +148,7 @@ export class QuickViewComponent implements OnInit {
         var temp1 = tempOrder.DateOfOrder.split('(');
         var temp2 = temp1[1].split('+');
         var dateOfOrder: number = parseInt(temp2[0]);
-        console.error(dateOfOrder);
+        //console.error(dateOfOrder);
 
         if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
           this.countPausedOrders += 1;
@@ -104,7 +164,7 @@ export class QuickViewComponent implements OnInit {
         var temp1 = tempOrder.DateOfOrder.split('(');
         var temp2 = temp1[1].split('+');
         var dateOfOrder: number = parseInt(temp2[0]);
-        console.error(dateOfOrder);
+        //console.error(dateOfOrder);
 
         if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
           this.countInProgressOrders += 1;
@@ -116,10 +176,17 @@ export class QuickViewComponent implements OnInit {
   setCounterDelayedorders(): void {
     for (var tempOrder of this.Orders) {
       if (tempOrder.Status.Decription === 'Delayed') {
-        this.countDelayedOrders += 1;
+        var temp1 = tempOrder.DateOfOrder.split('(');
+        var temp2 = temp1[1].split('+');
+        var dateOfOrder: number = parseInt(temp2[0]);
+        //console.error(dateOfOrder);
+
+        if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
+          this.countDelayedOrders += 1;
+          }
+        }
       }
     }
-  }
 
   getOrders(): void {
     this.synchronizerService.getOrders()
@@ -136,38 +203,5 @@ export class QuickViewComponent implements OnInit {
     console.error('date changed');
     this.todayNumber = Date.parse(event.target.value);
   }
-
-  //getDate(): string {
-  //  var dd = this.today.getDate();
-  //  var mm = this.today.getMonth() + 1; //January is 0!
-  //  var yyyy = this.today.getFullYear();
-
-  //  var startDate = yyyy + '-0' + mm + '-' + dd;
-  //  return startDate;
-  //}
-
-  //getendDate(): string {
-  //  var dd = this.today.getDate();
-
-  //  var x = this.today.setDate(dd - 30);
-  //  var endDays = this.today.getDate();
-  //  var endMonth = this.today.getMonth()+1;
-  //  var endYear = this.today.getFullYear();
-
-  //  var endDate = endYear + '-0' + endMonth + '-' + endDays;
-  //  return endDate;
-  //}
-
-  //getShortDate(): void {
-
-  //  if (this.dd < 10) {
-  //    this.dd = '0' + this.dd;
-  //  }
-  //  if (this.mm < 10) {
-  //    this.mm = '0' + this.mm;
-  //  }
-
-  //  var shortDate = this.dd + '/' + this.mm + '/' + this.yyyy;
-  //}
 
 }
