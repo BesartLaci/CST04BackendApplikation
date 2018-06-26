@@ -124,16 +124,15 @@
 
         <div *ngIf="selectedIngredients">
           <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of selectedIngredients">
-            <a *ngIf="!ingredient.Available && ingredient.Type == 'Base'" (click)="putInAivailableIngredients(ingredient)" class="list-group-item"> \-- {{ingredient.Type}} -| € {{ingredient.Price}} | {{ingredient.Name}}</a>
+            <a *ngIf="ingredient.Available && ingredient.Type == 'Filling'" (click)="putInAivailableIngredients(ingredient)" class="list-group-item">{{ingredient.Type}} | € {{ingredient.Price}} | {{ingredient.Name}}</a>
           </div>
         </div>
 
         <div *ngIf="selectedIngredients">
           <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of selectedIngredients">
-            <a *ngIf="ingredient.Available && ingredient.Type == 'Filling'" (click)="putInAivailableIngredients(ingredient)" class="list-group-item">{{ingredient.Type}} | € {{ingredient.Price}} | {{ingredient.Name}}</a>
+            <a *ngIf="!ingredient.Available && ingredient.Type == 'Base'" (click)="putInAivailableIngredients(ingredient)" class="list-group-item"> \-- {{ingredient.Type}} -| € {{ingredient.Price}} | {{ingredient.Name}}</a>
           </div>
         </div>
-
 
         <div *ngIf="selectedIngredients">
           <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of selectedIngredients">
@@ -161,13 +160,13 @@
 
         <div *ngIf="availableIngredients">
           <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of availableIngredients">
-            <a *ngIf="!ingredient.Available && ingredient.Type == 'Base'" (click)="putInSelectedIngredients(ingredient)" class="list-group-item"> \-- {{ingredient.Type}} -| € {{ingredient.Price}} | {{ingredient.Name}}</a>
+            <a *ngIf="ingredient.Available && ingredient.Type == 'Filling'" (click)="putInSelectedIngredients(ingredient)" class="list-group-item">{{ingredient.Type}} | € {{ingredient.Price}} |  {{ingredient.Name}}</a>
           </div>
         </div>
 
         <div *ngIf="availableIngredients">
           <div class="list-group " style="width:100%; margin:0" *ngFor="let ingredient of availableIngredients">
-            <a *ngIf="ingredient.Available && ingredient.Type == 'Filling'" (click)="putInSelectedIngredients(ingredient)" class="list-group-item">{{ingredient.Type}} | € {{ingredient.Price}} |  {{ingredient.Name}}</a>
+            <a *ngIf="!ingredient.Available && ingredient.Type == 'Base'" (click)="putInSelectedIngredients(ingredient)" class="list-group-item"> \-- {{ingredient.Type}} -| € {{ingredient.Price}} | {{ingredient.Name}}</a>
           </div>
         </div>
 

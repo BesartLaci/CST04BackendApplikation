@@ -6,7 +6,7 @@
     <div>
       <p>Paused Orders:</p>
       <div class="order-view-body-element order-view-list">
-        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+        <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == 'e9ea67d5-bee2-4372-9abb-408a2afe3640'">
             <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
           </div>
@@ -18,7 +18,7 @@
     <div>
       <p>Delayed Orders:</p>
       <div class="order-view-body-element order-view-list">
-        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+        <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == '83d176ef-0c09-4fdb-9e8e-3f422bed7867'">
             <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
           </div>
@@ -97,7 +97,7 @@
     <div>
       <p>Progess Order:</p>
       <div class="order-view-list order-view-Orders-elment">
-        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+        <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == '1d7ed2c9-e273-49e7-b7fd-b014f71a8a40'">
             <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
           </div>
@@ -109,7 +109,7 @@
     <div>
       <p>Open Orders:</p>
       <div class="order-view-list">
-        <div class="list-group" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+        <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == '0c16612c-9ad3-4ffe-bb58-3ea434e0f91f'">
             <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
           </div>

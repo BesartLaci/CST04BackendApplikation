@@ -92,23 +92,48 @@
   </div>
 
   <div class="package-view-selectedChocolates-element package-view-list">
+
     <div *ngIf="selectedChocolates">
       <div class="list-group " style="width:100%; margin:0" *ngFor="let chocolate of selectedChocolates">
-        <a (click)="putInAivailableChocolates(chocolate)" class="list-group-item">{{chocolate.Name}} | {{chocolate.Wrapping.WrappingId}}</a>
+        <div *ngIf="chocolate.Available">
+          <a (click)="putInAivailableChocolates(chocolate)" class="list-group-item">{{chocolate.Name}} </a>
+          </div>
+        </div>
+      </div>
+
+    <div *ngIf="selectedChocolates">
+      <div class="list-group " style="width:100%; margin:0" *ngFor="let chocolate of selectedChocolates">
+        <div *ngIf="!chocolate.Available">
+          <a (click)="putInAivailableChocolates(chocolate)" class="list-group-item"> \---{{chocolate.Name}} </a>
+        </div>
       </div>
     </div>
-  </div>
+
+    </div>
+
 
   <!--List of available Chocolates-->
   <div>
     <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> availableChocolates: </label>
   </div>
+
   <div class="package-view-availableChocolates-element package-view-list">
+
     <div *ngIf="availableChocolates">
       <div class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of availableChocolates">
-        <a (click)="putInSelectedChocolates(chocolate)" class="list-group-item">{{chocolate.Name}} | {{chocolate.ChocolateId}}</a>
+        <div *ngIf="chocolate.Available">
+          <a (click)="putInSelectedChocolates(chocolate)" class="list-group-item">{{chocolate.Name}} </a>
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
+    <div *ngIf="availableChocolates">
+      <div class="list-group" style="width:100%; margin:0" *ngFor="let chocolate of availableChocolates">
+        <div *ngIf="!chocolate.Available">
+          <a (click)="putInSelectedChocolates(chocolate)" class="list-group-item"> \---{{chocolate.Name}} </a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
