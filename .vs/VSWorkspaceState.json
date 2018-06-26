@@ -1,16 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\e2e",
-    "\\e2e\\src",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\chocolates-view",
-    "\\src\\app\\ingredients-view",
-    "\\src\\app\\models",
-    "\\src\\app\\order-activities-view",
-    "\\src\\app\\package-view"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\package-view\\package-view.component.html",
+  "SelectedNode": "\\src\\index.html",
   "PreviewInSolutionExplorer": false
 }
