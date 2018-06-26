@@ -2,24 +2,74 @@
 <div class="quick-view-stats">
 
   <div class='col-sm-2'>
-    StartDate: <input type="date" value="{{startDate |  date:'yyyy-MM-dd'}}" (keyup)="selectNewStartDate($event)"/>
+    ´<div class="col-sm-4" (click)="refresh()">
+      StartDate
+    </div>
+    <div class="col-sm-8">
+      <input type="date" value="{{startDate |  date:'yyyy-MM-dd'}}" (keyup)="selectNewStartDate($event)" />
+    </div>
   </div>
 
   <div class='col-sm-2'>
-    <p>End Date: <input type="date" value="{{today |  date:'yyyy-MM-dd'}}" (keyup)="selectNewtoday($event)"/></p>
+    ´<div class="col-sm-4" (click)="refresh()">
+      EndDate
+    </div>
+    <div class="col-sm-8">
+      <input type="date" value="{{today |  date:'yyyy-MM-dd'}}" (keyup)="selectNewtoday($event)" />
+    </div>
   </div>
+
+  <!--<div class='col-sm-2'>
+    <p>Date <input type="date" value="{{today |  date:'yyyy-MM-dd'}}" (keyup)="selectNewtoday($event)" /></p>
+  </div>-->
 
   <div class='col-sm-2'>
     <p>Sales: {{SumSales}} €</p>
   </div>
 
-  <div class='col-sm-4'>
-    <p>Orders: {{countOpenOrders}} <span class='glyphicon glyphicon-log-in'></span>    {{countInProgressOrders}}  <span class='glyphicon glyphicon-refresh'></span> {{countPausedOrders}}    <span class='glyphicon glyphicon-pause'></span> {{countDelayedOrders}}    <span class='glyphicon glyphicon-flash'></span></p>
+
+  <!--Oder Status Bar-->
+  <div class='col-sm-4' (click)="refresh()">
+
+    <div class="col-sm-2">
+
+    </div>
+
+    <div class="col-sm-2">
+      Orders
+    </div>
+
+    <div class="col-sm-2">
+      <span class='glyphicon glyphicon-log-in'></span>
+      {{countOpenOrders}}
+    </div>
+
+    <div class="col-sm-2">
+      <span class='glyphicon glyphicon-refresh'></span>
+      {{countInProgressOrders}}
+    </div>
+
+    <div class="col-sm-2">
+      <span class='glyphicon glyphicon-pause'></span>
+      {{countPausedOrders}}
+    </div>
+
+    <div class="col-sm-2">
+      <span class='glyphicon glyphicon-flash'></span>
+      {{countDelayedOrders}}
+    </div>
+
   </div>
 
+  <!--Refesh button-->
   <div class='col-sm-2'>
-    <button (click)="refresh()" class="default btn">Refresh</button>
-    <!--{{startDateNumber}}
-  {{todayNumber}}-->
+
+    <img (click)="refresh()"
+         height="42" width="42"
+         src="https://previews.123rf.com/images/hayesnch/hayesnch1506/hayesnch150600004/40908917-cacao-bean-cacao-fruit-cocoa-bean-cocoa-fruit.jpg" />
+
+    <!--<button (click)="refresh()" class="default btn" >Refresh</button>-->
   </div>
+
+
 </div>

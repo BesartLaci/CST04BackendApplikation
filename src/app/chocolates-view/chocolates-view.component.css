@@ -35,7 +35,8 @@
 }
 
 .chocolate-view-image {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjyC0yokWiE9yU7sqnGriuY9Jsxn9wtPdkANEu45uCGM0m9PA6");
+  /*background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjyC0yokWiE9yU7sqnGriuY9Jsxn9wtPdkANEu45uCGM0m9PA6");*/
+  background-image: url("https://images-na.ssl-images-amazon.com/images/I/71g8KrZZjLL._SL1181_.jpg");
   height: 20vw;
   background-position: center;
   background-size: contain;
