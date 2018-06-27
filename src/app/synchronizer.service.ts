@@ -26,7 +26,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SynchronizerService {
-  //Hallo
 
 
  // private serviceUrl = 'http://localhost:8090/AppServiceService/';

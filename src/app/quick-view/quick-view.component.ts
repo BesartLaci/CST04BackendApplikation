@@ -26,6 +26,7 @@ export class QuickViewComponent implements OnInit {
   OrderContentList: OrderContent[];
   IngredientList: Ingredient[];
   packagePrice: number;
+  SumSalesString: string;
  
 
   constructor(private synchronizerService: SynchronizerService)
@@ -59,16 +60,16 @@ export class QuickViewComponent implements OnInit {
       var temp1 = tempOrder.DateOfOrder.split('(');
       var temp2 = temp1[1].split('+');
       var dateOfOrder: number = parseInt(temp2[0]);
-      console.error(dateOfOrder);
+      //console.error(dateOfOrder);
       console.error('drinnen1');
 
       if ((dateOfOrder >= this.startDateNumber) && (dateOfOrder <= this.todayNumber)) {
         console.error('drinnen2');
         this.getOrderContentChocolates(tempOrder.OrderId);
-        console.error(this.OrderContentList)
+        //console.error(this.OrderContentList)
 
         for (var tempOrderContent of this.OrderContentList) {
-
+ 
           console.error(tempOrderContent.Chocolate.ChocolateId);
           if (tempOrderContent.Chocolate.ChocolateId) {
             this.getIngredientsByChocolateId(tempOrderContent.Chocolate.ChocolateId);
@@ -77,8 +78,11 @@ export class QuickViewComponent implements OnInit {
             for (var tempIngredient of this.IngredientList) {
               console.error('drinnen4')
               this.SumSales += tempIngredient.Price;
-              console.error(this.SumSales.toFixed(2))
+              console.error(this.SumSales)
             }
+            this.SumSales = this.SumSales * tempOrderContent.Amount;
+            this.SumSalesString = this.SumSales.toFixed(2);
+            
           }
         }  
       }
