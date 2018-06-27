@@ -52,6 +52,7 @@ export class PackageViewComponent implements OnInit {
     this.selectedPackage.Wrapping.Name = "wrap no. 1";
     this.setDefaultDemoData();
     this.getWrappings();
+    this.packages = new Array<Package>();
     this.getPackagesWithChocolates();
 
     this.availableChocolates = new Array<Chocolate>();
@@ -71,6 +72,7 @@ export class PackageViewComponent implements OnInit {
 
   getPackagesWithChocolates(): void {
     console.error("getPackagesWithChocolates()");
+
     this.synchronizerService.getPackagesWithChocolates()
       .subscribe(packages => this.packages = packages);
   }
@@ -86,7 +88,7 @@ export class PackageViewComponent implements OnInit {
       this.setDefaultDemoData();
       this.selectedChocolates = this.selectedPackage.Chocolates;
 
-      this.availableChocolates = new Array<Chocolate>()
+      //this.availableChocolates = new Array<Chocolate>()
 
       this.getChocolatesForAvailableChocolates();
       this.setAvailableChocolates();
@@ -130,6 +132,7 @@ export class PackageViewComponent implements OnInit {
     this.synchronizerService.updatePackage(this.selectedPackage)
       .subscribe(updateCheck => this.updateCheck = updateCheck);
 
+    this.packages = new Array<Package>();
     this.getPackagesWithChocolates();
   }
 
@@ -143,6 +146,7 @@ export class PackageViewComponent implements OnInit {
     this.synchronizerService.createNewPackage(this.selectedPackage)
       .subscribe(updateCheck => this.updateCheck = updateCheck);
 
+    //this.packages = new Array<Package>();
     this.getPackagesWithChocolates();
   }
 
