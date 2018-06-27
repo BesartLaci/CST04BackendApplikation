@@ -4,11 +4,12 @@
 
     <!--Left Container delayed Orders-->
     <div>
-      <p>Paused Orders:</p>
+      <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> pausedOrders: </label>
+      <!--<p>Paused Orders:</p>-->
       <div class="order-view-body-element order-view-list">
         <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == 'e9ea67d5-bee2-4372-9abb-408a2afe3640'">
-            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+            <div (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} <br /> {{order.Note}}</div>
           </div>
         </div>
       </div>
@@ -16,11 +17,12 @@
 
     <!--Left Container paused Orders-->
     <div>
-      <p>Delayed Orders:</p>
+      <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> delayedOrders: </label>
+      <!--<p>Delayed Orders:</p>-->
       <div class="order-view-body-element order-view-list">
         <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == '83d176ef-0c09-4fdb-9e8e-3f422bed7867'">
-            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+            <div (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} <br /> {{order.Note}}</div>
           </div>
         </div>
       </div>
@@ -32,7 +34,8 @@
 <!--Detail View-->
 <div class="col-sm-6">
   <div *ngIf="selectedOrder">
-    <p>Detail View:</p>
+    <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> Detail View: </label>
+   <!-- <p>Detail View:</p>-->
     <div class="col-sm-12 order-view-OrderDetails-element">
       <table class="table table-striped">
         <tr>
@@ -86,7 +89,7 @@
       </table>
 
     </div>
-   </div>
+  </div>
 </div>
 
 <!--Left Container progess and open Orders-->
@@ -95,11 +98,13 @@
 
     <!--progress Orders-->
     <div>
-      <p>Progess Order:</p>
+      <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> progressOrders: </label>
+     <!-- <p>Progess Order:</p>-->
       <div class="order-view-list order-view-Orders-elment">
         <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
+
           <div *ngIf="order.Status.OrderStatusId == '1d7ed2c9-e273-49e7-b7fd-b014f71a8a40'">
-            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+            <div (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} <br /> {{order.Note}}</div>
           </div>
         </div>
       </div>
@@ -107,11 +112,12 @@
 
     <!--new Orders-->
     <div>
-      <p>Open Orders:</p>
+      <label class="col-sm-12" style="margin-bottom:5px; margin-top:5px;"> openOrders: </label>
+      <!--<p>Open Orders:</p>-->
       <div class="order-view-list">
         <div class="list-group order-view-OrderDetails-element" style="width:100%; margin:0" *ngFor="let order of tempOrders">
           <div *ngIf="order.Status.OrderStatusId == '0c16612c-9ad3-4ffe-bb58-3ea434e0f91f'">
-            <a (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} | {{order.Note}}</a>
+            <div (click)="setSelectedOrder(order)" class="list-group-item"> {{order.OrderId}} <br /> {{order.Note}}</div>
           </div>
         </div>
       </div>

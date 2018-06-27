@@ -8,12 +8,12 @@
   <div class="package-view-packageList-element package-view-list">
     <div *ngIf="packages">
       <div class="list-group" style="width:100%; margin:0" *ngFor="let package of packages">
-        <a *ngIf="package.Available" (click)="setSelectedPackage(package)" class="list-group-item"> {{package.Name}} </a>
+        <div *ngIf="package.Available" (click)="setSelectedPackage(package)" class="list-group-item"> {{package.Name}} </div>
       </div>
     </div>
     <div *ngIf="packages">
       <div class="list-group" style="width:100%; margin:0" *ngFor="let package of packages">
-        <a *ngIf="!package.Available" (click)="setSelectedPackage(package)" class="list-group-item"> \--- {{package.Name}} </a>
+        <div *ngIf="!package.Available" (click)="setSelectedPackage(package)" class="list-group-item"> \--- {{package.Name}} </div>
       </div>
     </div>
   </div>
